@@ -30,7 +30,7 @@
 html { -webkit-text-size-adjust: 100%; }
 body { background: var(--space); color: var(--white); font: 600 16px/1.5 var(--f-body); margin: 0; min-height: 100vh;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 48px; overflow-x: hidden; }
-#bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+#bg { position: fixed; left: 0; top: 0; width: 100vw; height: 100lvh; z-index: 0; display: block; background: #0B0F2E; }
 .app { position: relative; z-index: 1; max-width: 1380px; margin-inline: auto; }
 h1, h2, h3, h4, p { margin: 0; }
 h1, h2, h3 { font-family: var(--f-display); font-weight: 400; letter-spacing: .01em; line-height: 1.05; text-wrap: balance; }
@@ -942,6 +942,48 @@ body.sheet-on { overflow: hidden; }
   .pil-coach { bottom: 6px; } .pil-coach .pil-bubble { padding: 6px 12px; font-size: 13px; }
 }
 
+/* ---------- v14: Real Missions Museum, sources, real comparison ---------- */
+.hooktile.orange { --c: var(--orange); --cd: var(--orange-d); color: #fff; }
+.museum { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.mcard { background: #fff; color: var(--ink); border: 0; border-radius: 22px; padding: 14px; display: grid; gap: 6px; align-content: start; text-align: left; box-shadow: var(--lift); transition: transform .12s; }
+.mcard:hover { transform: translateY(-3px); }
+.mcard b { font-size: 18px; line-height: 1.2; }
+.mcard .npic { height: 112px; margin-bottom: 4px; }
+.mcard .npic .planet, .mdetail .npic .planet { width: auto; height: auto; }
+.mknown { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; color: var(--muted); margin-top: 2px; }
+.mknown svg { width: 18px; height: 18px; flex: none; }
+.mdetail { display: grid; gap: 14px; }
+.mhead { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: center; }
+.mhead .npic { height: 130px; }
+.mhead h2 { font-size: clamp(24px, 4vw, 34px); line-height: 1.1; }
+.mgoal { font-size: 17px; font-weight: 700; line-height: 1.4; }
+.mhard { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; background: var(--soft); border-radius: 16px; padding: 12px 14px; }
+.mhard svg { width: 30px; height: 30px; }
+.mfacts { width: 100%; }
+.mfacts th { text-align: left; width: 34%; color: var(--muted); font-weight: 800; vertical-align: top; }
+.mfacts td { font-weight: 700; line-height: 1.4; }
+.chip.unk { background: #FFF1D6; color: #8A5300; }
+.srclist { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.srclist li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; line-height: 1.35; overflow-wrap: anywhere; }
+.srclist a { color: #2D5BD7; font-weight: 800; text-decoration: underline; display: inline-block; padding: 5px 0; }
+.srclist li.gsrc { display: grid; gap: 2px; }
+.srctag { font-size: 12px; font-weight: 900; background: var(--soft); color: var(--ink); border-radius: 8px; padding: 1px 7px; }
+.srcgroup { border-top: 2px solid var(--line); padding: 8px 0; }
+.srcgroup summary { cursor: pointer; display: flex; gap: 10px; align-items: baseline; font-size: 16px; min-height: 32px; }
+.srcgroup .srclist { margin: 8px 0 4px 6px; }
+.plainlist { margin: 0; padding-left: 20px; display: grid; gap: 8px; line-height: 1.45; }
+.mnav { justify-content: space-between; }
+.mnav .btn { display: inline-flex; gap: 6px; align-items: center; }
+@media (max-width: 560px) {
+  .mhead { grid-template-columns: 1fr; }
+  .mhead .npic { height: 110px; }
+  .museum { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mcard { padding: 10px; } .mcard .npic { height: 90px; } .mcard b { font-size: 16px; }
+  .mnav .btn { flex: 1 1 100%; justify-content: center; }
+}
+@media (max-width: 380px) { .museum { grid-template-columns: 1fr; } }
+
+
 /* v13.1: tablet and phone fixes */
 @media (max-width: 860px) and (min-width: 641px) { .build.quick { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); } }
 @media (max-width: 640px) { .build.quick { grid-template-columns: 1fr; } }
@@ -958,6 +1000,13 @@ body.sheet-on { overflow: hidden; }
 .pil-ctl .btn span { white-space: normal; overflow-wrap: anywhere; min-width: 0; }
 @media (max-width: 420px) { .pil-ctl .btn.hold, .pil-ctl > .btn { font-size: 13px; padding-inline: 6px; } }
 
+
+/* v14.2: no flicker on phones — blur behind sticky bars flickers while scrolling on mobile browsers */
+@media (max-width: 1024px), (hover: none) {
+  .top, .glass, .menupop, .soundpop, .launchbar { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .top { background: #0E1238; }
+}
+html { background: #0B0F2E; }
 </style>
 </head><body><canvas id="bg" aria-hidden="true"></canvas>
 <div class="app" id="app"></div>
@@ -3061,6 +3110,15 @@ ART.planet = (kind) => {
     mars: `<circle cx="50" cy="50" r="40" fill="#F0683C"/><circle cx="34" cy="40" r="7" fill="#C94A22"/><circle cx="62" cy="62" r="10" fill="#C94A22"/><path d="M20 54q20-6 40 2t22-4" stroke="#C94A22" stroke-width="5" fill="none"/><path d="M38 14c8-2 16-2 24 0" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
     jupiter: `<circle cx="50" cy="50" r="40" fill="#F2C38B"/><path d="M12 36h76M10 50h80M14 64h72" stroke="#C98A4B" stroke-width="7"/><ellipse cx="62" cy="62" rx="9" ry="6" fill="#E0573A" stroke="#221E52" stroke-width="2.5"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
     aral: `<circle cx="50" cy="50" r="40" fill="#E8C98A"/><path d="M30 28c8-6 18-4 22 4s-2 14 4 20 2 16-8 18-20-6-22-16 0-20 4-26z" fill="#F4ECD8" opacity=".9"/><path d="M34 30c6-4 12-2 14 4s-6 8-10 8-8-6-4-12z" fill="#2E9BD6"/><path d="M50 54c6-2 10 2 8 8s-8 8-12 4 0-10 4-12z" fill="#5CC8FF" opacity=".8"/><path d="M38 41l10 2" stroke="#221E52" stroke-width="2.5" stroke-linecap="round"/><path d="M70 30c-6 6-8 14-6 22" stroke="#5CC8FF" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
+    saturn: `<circle cx="50" cy="50" r="40" fill="#1B1550"/><ellipse cx="50" cy="52" rx="44" ry="11" fill="none" stroke="#E9CF95" stroke-width="7" transform="rotate(-14 50 52)"/><circle cx="50" cy="50" r="23" fill="#F0D49A" stroke="#221E52" stroke-width="3"/><path d="M29 44h42M28 54h44" stroke="#D6B26A" stroke-width="4"/><path d="M8 62q42-26 84-22" stroke="#E9CF95" stroke-width="7" fill="none" transform="rotate(-6 50 50)"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
+    sun: `<circle cx="50" cy="50" r="40" fill="#FF8A3D"/><circle cx="50" cy="50" r="27" fill="${C.y}" stroke="#221E52" stroke-width="3"/><path d="M50 14v8M50 78v8M14 50h8M78 50h8M25 25l6 6M69 69l6 6M25 75l6-6M69 31l6-6" stroke="#FFE7A3" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
+    pluto: `<circle cx="50" cy="50" r="40" fill="#C9A98A"/><path d="M50 74c-14-9-22-17-22-26 0-7 5-11 11-11 5 0 9 3 11 7 2-4 6-7 11-7 6 0 11 4 11 11 0 9-8 17-22 26z" fill="#F4E6D3"/><circle cx="30" cy="30" r="5" fill="#9C7B60"/><circle cx="70" cy="28" r="4" fill="#9C7B60"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
+    comet: `<circle cx="50" cy="50" r="40" fill="#1B1550"/><path d="M12 22l40 22M14 34l36 16M22 14l34 26" stroke="#7DF0FF" stroke-width="5" stroke-linecap="round" opacity=".7"/><path d="M50 50c4-10 18-10 20 0 8 0 12 10 6 16-6 8-20 8-26 2-6-4-6-14 0-18z" fill="#9C98B4" stroke="#221E52" stroke-width="3"/><circle cx="62" cy="62" r="3" fill="#6E6A99"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
+    asteroid: `<circle cx="50" cy="50" r="40" fill="#1B1550"/><path d="M28 46c2-14 18-22 32-16 14 4 18 18 12 30-6 14-24 18-36 10-8-6-10-14-8-24z" fill="#A8A3BF" stroke="#221E52" stroke-width="3"/><circle cx="44" cy="44" r="6" fill="#8A85A6"/><circle cx="60" cy="60" r="4" fill="#8A85A6"/><circle cx="74" cy="28" r="5" fill="#A8A3BF" stroke="#221E52" stroke-width="2.5"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
+    station: `<circle cx="50" cy="50" r="40" fill="#2B4FA8"/><path d="M14 50h72" stroke="#fff" stroke-width="5"/><rect x="18" y="30" width="12" height="40" fill="${C.c}" stroke="#221E52" stroke-width="2.5"/><rect x="70" y="30" width="12" height="40" fill="${C.c}" stroke="#221E52" stroke-width="2.5"/><rect x="40" y="42" width="20" height="16" rx="4" fill="#fff" stroke="#221E52" stroke-width="2.5"/><rect x="34" y="34" width="6" height="32" fill="${C.c}" stroke="#221E52" stroke-width="2"/><rect x="60" y="34" width="6" height="32" fill="${C.c}" stroke="#221E52" stroke-width="2"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
+    scope: `<circle cx="50" cy="50" r="40" fill="#5D43D3"/><rect x="34" y="30" width="24" height="44" rx="4" fill="#E9E7F5" stroke="#221E52" stroke-width="3" transform="rotate(-30 46 52)"/><rect x="16" y="40" width="14" height="26" fill="${C.c}" stroke="#221E52" stroke-width="2.5" transform="rotate(-30 46 52)"/><rect x="62" y="40" width="14" height="26" fill="${C.c}" stroke="#221E52" stroke-width="2.5" transform="rotate(-30 46 52)"/><circle cx="30" cy="22" r="2" fill="#fff"/><circle cx="74" cy="76" r="2.5" fill="#fff"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
+    gps: `<circle cx="50" cy="50" r="40" fill="#1B1550"/><circle cx="50" cy="50" r="17" fill="#3FA7FF" stroke="#221E52" stroke-width="3"/><path d="M42 44c4-3 8 1 12-1s4 6 0 8-6 2-7 6-6-2-6-6 0-5 1-7z" fill="#5ED37A"/><ellipse cx="50" cy="50" rx="33" ry="14" fill="none" stroke="#7DF0FF" stroke-width="2.5" stroke-dasharray="5 4"/><rect x="13" y="46" width="8" height="8" fill="${C.y}" stroke="#221E52" stroke-width="2"/><rect x="79" y="46" width="8" height="8" fill="${C.y}" stroke="#221E52" stroke-width="2"/><rect x="46" y="32" width="8" height="8" fill="${C.y}" stroke="#221E52" stroke-width="2"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
+    deep: `<circle cx="50" cy="50" r="40" fill="#120D3A"/><circle cx="24" cy="30" r="2" fill="#fff"/><circle cx="76" cy="24" r="1.6" fill="#fff"/><circle cx="70" cy="74" r="2" fill="#fff"/><circle cx="26" cy="70" r="5" fill="${C.y}"/><path d="M50 44l14-8M50 44v18" stroke="#fff" stroke-width="3"/><path d="M38 40a16 16 0 0124 0z" fill="#fff" stroke="#221E52" stroke-width="2.5" transform="rotate(-20 50 40)"/><rect x="45" y="44" width="10" height="9" fill="#E0B44A" stroke="#221E52" stroke-width="2"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
     custom: `<circle cx="50" cy="50" r="40" fill="${C.p}"/><path d="M50 22l7 17 18 1-14 11 5 18-16-10-16 10 5-18-14-11 18-1z" fill="${C.y}" stroke="#221E52" stroke-width="3" stroke-linejoin="round"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
     sandbox: `<circle cx="50" cy="50" r="40" fill="${C.v}"/><path d="M50 50c0-10 14-14 20-6s0 24-16 26-28-10-28-26 18-30 38-26" stroke="${C.y}" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M50 50c0 6-8 8-12 4" stroke="${C.p}" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="50" cy="50" r="40" fill="none" stroke="#221E52" stroke-width="4"/>`,
   };
@@ -3199,13 +3257,24 @@ ART.sky = function (canvas) {
     { x: 0.82, y: 0.2, r: 0.42, c: 'rgba(255,92,138,0.20)', dx: 0.012 }, { x: 0.12, y: 0.82, r: 0.5, c: 'rgba(46,197,255,0.16)', dx: -0.01 },
     { x: 0.55, y: 0.55, r: 0.6, c: 'rgba(139,108,255,0.20)', dx: 0.006 }, { x: 0.95, y: 0.9, r: 0.35, c: 'rgba(62,208,126,0.10)', dx: 0.008 },
   ];
+  // On phones the address bar hides and shows while scrolling, which changes the window height a little.
+  // Redrawing the whole sky then makes the background flash, so small height changes are ignored and
+  // the stars stay in the same places.
+  let lastW = 0, lastH = 0;
   function resize() {
-    dpr = Math.min(2, window.devicePixelRatio || 1); w = innerWidth; h = innerHeight;
+    const nw = innerWidth, nh = innerHeight, ndpr = Math.min(2, window.devicePixelRatio || 1);
+    const widthChanged = nw !== lastW || ndpr !== dpr;
+    if (!widthChanged && nh <= lastH && lastH - nh < 160) return; // only the browser bar moved
+    if (!widthChanged && nh > lastH && nh - lastH < 160 && lastH) { lastH = nh; } // grow a bit without redrawing stars
+    dpr = ndpr; w = nw; h = Math.max(nh, widthChanged ? 0 : lastH); lastW = nw; lastH = h;
     canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.round(w * h / 3800);
-    stars = Array.from({ length: n }, () => ({ x: Math.random(), y: Math.random(), z: Math.random(), s: rnd(0.5, 2.2), tw: rnd(0, 6.3), sp: rnd(0.6, 2.2), col: Math.random() < 0.12 ? (Math.random() < 0.5 ? '#FFE7A3' : '#BFE9FF') : '#FFFFFF' }));
+    if (widthChanged || !stars.length) {
+      const n = Math.round(w * h / 3800);
+      stars = Array.from({ length: n }, () => ({ x: Math.random(), y: Math.random(), z: Math.random(), s: rnd(0.5, 2.2), tw: rnd(0, 6.3), sp: rnd(0.6, 2.2), col: Math.random() < 0.12 ? (Math.random() < 0.5 ? '#FFE7A3' : '#BFE9FF') : '#FFFFFF' }));
+    }
+    if (typeof raf !== 'undefined') cancelAnimationFrame(raf); last = 0; frame(performance.now()); // draw at once so the cleared canvas is never shown
   }
-  addEventListener('resize', resize); resize();
+  addEventListener('resize', resize);
   addEventListener('pointermove', e => { mx = e.clientX / w - 0.5; my = e.clientY / h - 0.5; });
   function planet(p, x, y, r) {
     if (p.ring) { ctx.save(); ctx.translate(x, y); ctx.rotate(-0.35); ctx.beginPath(); ctx.ellipse(0, 0, r * 2.1, r * 0.6, 0, Math.PI, 0); ctx.strokeStyle = 'rgba(255,230,170,.75)'; ctx.lineWidth = r * 0.28; ctx.stroke(); ctx.restore(); }
@@ -3261,7 +3330,7 @@ ART.sky = function (canvas) {
     if (dim > 0) { ctx.fillStyle = `rgba(8,11,38,${dim})`; ctx.fillRect(0, 0, w, h); }
     if (!reduce) raf = requestAnimationFrame(frame);
   }
-  let raf = requestAnimationFrame(frame);
+  let raf = 0; resize();
   document.addEventListener('visibilitychange', () => { if (document.hidden) cancelAnimationFrame(raf); else raf = requestAnimationFrame(frame); });
   return { setDim(v) { dim = v; if (reduce) requestAnimationFrame(frame); } };
 };
@@ -3848,6 +3917,211 @@ H.rewardsFor = (r, stars, isDaily, newBadges) => {
 H.defaultProfile = () => ({ xp: 0, dust: 30, owned: ['paint-gold', 'panel-blue', 'hat-none', 'trail-classic'], equip: { paint: 'paint-gold', panel: 'panel-blue', hat: 'hat-none', trail: 'trail-classic' }, cards: [], streak: 0, lastDaily: null, daily: {}, lastLogin: null, quizDay: null, unlockAll: false, capsules: 0 });
 
 root.HOOKS = H;
+})(window);
+
+</script>
+<script>
+/* =====================================================================
+   ORBI'S MISSION LAB — Real Missions Museum, sources and research quiz (v14)
+   Every number here comes from the team's research base: 20 real missions
+   checked against official pages (NASA, ESA, JAXA, CNSA and operators).
+   "unknown" means the number was not found on an official page. We never guess.
+   ===================================================================== */
+'use strict';
+(function (root) {
+const U = 'unknown';
+// facts: [label, value, isName]  (isName = a proper name, kept in English)
+const M = [
+  { id: 'apollo11', name: 'Apollo 11', who: 'NASA', year: 1969, art: 'lunarice',
+    goal: 'The first people to walk on the Moon, and come home safely.',
+    hard: 'Little time and fuel on the Moon, and no radio while flying behind the Moon.',
+    facts: [['Rocket', 'Saturn V', 1], ['Weight', 'two ships, Columbia and Eagle, weighed separately'], ['Electricity', 'fuel cells and batteries'], ['Radio', 'lost for a while behind the Moon'], ['Science', '21.55 kg of Moon rock brought home'], ['Cost', U]],
+    src: ['S01', 'S02', 'S03', 'S51'] },
+  { id: 'artemis1', name: 'Artemis I', who: 'NASA + ESA', year: 2022, art: 'lunarice',
+    goal: 'A test flight around the Moon with no crew, to get ready for astronauts.',
+    hard: 'Coming home super fast and super hot through Earth\'s air.',
+    facts: [['Rocket', 'SLS Block 1', 1], ['Weight', 'Orion: about 35,380 kg at liftoff'], ['Electricity', 'about 11.2 kW from 4 solar wings'], ['Radio', 'long-distance radio, speed unknown'], ['Where', 'a far orbit around the Moon, 25 days in all'], ['Cost', U]],
+    src: ['S04', 'S05', 'S06', 'S07'] },
+  { id: 'demo2', name: 'SpaceX Demo-2', who: 'SpaceX + NASA', year: 2020, art: 'station',
+    goal: 'The first test of a private spaceship carrying astronauts to the space station.',
+    hard: 'Docking to the station by itself and keeping the crew safe.',
+    facts: [['Rocket', 'Falcon 9', 1], ['Weight', U], ['Electricity', U], ['Radio', U], ['Where', 'the space station, about 63 days'], ['Cost', U]],
+    src: ['S08'] },
+  { id: 'iss', name: 'International Space Station', who: 'five space agencies', year: 1998, art: 'station',
+    goal: 'A home and science lab in space where astronauts live and work.',
+    hard: 'Thin air slowly drags it down, so it needs pushes and supplies.',
+    facts: [['Rocket', 'many rockets: it was built piece by piece'], ['Weight', '419,725 kg'], ['Electricity', '75 to 90 kW from 8 solar arrays'], ['Radio', 'relay satellites (TDRS) and ground stations'], ['Where', 'low orbit, about 90 to 93 minutes per lap'], ['Cost', 'no single price: many countries pay']],
+    src: ['S09', 'S10', 'S11'] },
+  { id: 'hubble', name: 'Hubble Space Telescope', who: 'NASA + ESA', year: 1990, art: 'scope',
+    goal: 'A telescope above the air that sees ultraviolet, visible and near-infrared light.',
+    hard: 'Air drag in low orbit, and it must point super steadily.',
+    facts: [['Rocket', 'Space Shuttle Discovery', 1], ['Weight', 'about 10,800 kg at launch, 12,200 kg after repairs'], ['Electricity', 'more than 5,200 W made, about 2,100 W used'], ['Radio', 'up to 1 Mbit/s through relay satellites'], ['Where', '483 km up, 95 minutes per lap'], ['Cost', 'about $16B in 2021 money, all years together']],
+    src: ['S12', 'S13', 'S14', 'S15', 'S16'] },
+  { id: 'webb', name: 'James Webb Space Telescope', who: 'NASA + ESA + CSA', year: 2021, art: 'l2survey',
+    goal: 'An infrared telescope that looks at the first galaxies, stars and planets.',
+    hard: 'It must stay super cold behind a giant sunshield, and nobody can go there to fix it.',
+    facts: [['Rocket', 'Ariane 5 ECA', 1], ['Weight', 'about 6,200 kg at launch'], ['Electricity', 'about 2,000 W'], ['Radio', '28 Mbit/s home through the Deep Space Network'], ['Where', 'around the L2 point, about 1.5 million km from Earth'], ['Cost', U]],
+    src: ['S17', 'S18', 'S19', 'S20'] },
+  { id: 'landsat9', name: 'Landsat 9', who: 'NASA + USGS', year: 2021, art: 'aral',
+    goal: 'Photographs all of Earth\'s land to watch water, forests, farms and cities change.',
+    hard: 'It sees each place only once every 16 days.',
+    facts: [['Rocket', 'Atlas V 401', 1], ['Weight', U], ['Electricity', U], ['Science', 'cameras: 30 m color, 15 m black-and-white, 100 m heat'], ['Where', '705 km up, over the poles, in a sun-synced orbit'], ['Cost', 'at most $885M (NASA\'s promise)']],
+    src: ['S21', 'S22', 'S53'] },
+  { id: 'gps', name: 'GPS', who: 'U.S. Space Force', year: 1978, art: 'gps',
+    goal: 'Satellites that tell your phone where you are and what time it is.',
+    hard: 'Enough satellites must be in the sky everywhere, all the time.',
+    facts: [['Rocket', 'many rockets over the years'], ['Weight', 'depends on the satellite generation'], ['Electricity', 'solar panels; 4 atomic clocks on each satellite'], ['Radio', 'L-band navigation signals'], ['Where', '20,200 km up, in 6 orbit rings'], ['Cost', 'no single price: a system built over many years']],
+    src: ['S23', 'S24'] },
+  { id: 'voyager', name: 'Voyager 1 & 2', who: 'NASA', year: 1977, art: 'deep',
+    goal: 'Two probes that flew past the giant planets and are now leaving the Solar System.',
+    hard: 'Huge distance, and nuclear power that gets weaker every year.',
+    facts: [['Rocket', 'Titan IIIE-Centaur', 1], ['Weight', 'Voyager 1: 721.9 kg (NASA) or 815 kg (counted another way)'], ['Electricity', '3 nuclear generators, about 474 W at launch'], ['Radio', 'Deep Space Network; speed depends on distance'], ['Science', '10 experiments; 4 still work on Voyager 1'], ['Cost', U]],
+    src: ['S25', 'S26', 'S27'] },
+  { id: 'parker', name: 'Parker Solar Probe', who: 'NASA', year: 2018, art: 'sun',
+    goal: 'Flies closer to the Sun than anything else to study its hot outer air and wind.',
+    hard: 'Extreme heat: it needs a heat shield and cooled solar panels.',
+    facts: [['Rocket', 'Delta IV Heavy', 1], ['Weight', '685 kg at launch'], ['Electricity', U], ['Radio', U], ['Where', 'around the Sun, as close as 6.2 million km at first'], ['Cost', U]],
+    src: ['S28'] },
+  { id: 'juno', name: 'Juno', who: 'NASA', year: 2011, art: 'jupiter',
+    goal: 'Studies the inside of Jupiter, its clouds and its magnetic field.',
+    hard: 'Strong radiation, and only about 400 W of solar power at Jupiter.',
+    facts: [['Rocket', 'Atlas V 551', 1], ['Weight', '3,625 kg at launch: 1,593 kg ship + 2,032 kg fuel'], ['Electricity', 'about 14 kW near Earth, about 400 W at Jupiter'], ['Radio', 'Deep Space Network, X-band and Ka-band'], ['Where', 'over Jupiter\'s poles, 53 days per lap, later 33'], ['Cost', '$1.13B for the whole mission']],
+    src: ['S29', 'S30'] },
+  { id: 'cassini', name: 'Cassini-Huygens', who: 'NASA + ESA + ASI', year: 1997, art: 'saturn',
+    goal: 'Explored Saturn, its rings and moons, and dropped the Huygens probe onto Titan.',
+    hard: 'A long trip, slow messages and nuclear power that gets weaker.',
+    facts: [['Rocket', 'Titan IVB/Centaur', 1], ['Weight', '5,712 kg at launch, with fuel and Huygens'], ['Electricity', 'nuclear: 885 W at the start, 633 W at the end'], ['Radio', 'messages took 67 to 85 minutes to reach Earth'], ['Where', '294 orbits around Saturn'], ['Cost', '$3.9B, with 20 years of flying it']],
+    src: ['S31'] },
+  { id: 'newhorizons', name: 'New Horizons', who: 'NASA', year: 2006, art: 'pluto',
+    goal: 'The first close flyby of Pluto, then on to the Kuiper Belt.',
+    hard: 'A very slow radio, so sending the photos home took a long time.',
+    facts: [['Rocket', 'Atlas V 551 + Star 48B', 1], ['Weight', '478 kg'], ['Electricity', 'nuclear: about 250 W at launch, 200 W at Pluto'], ['Radio', '1 to 2 kbit/s from Pluto, 4.5 light-hours away'], ['Where', 'flew past Pluto without stopping'], ['Cost', U]],
+    src: ['S32', 'S33'] },
+  { id: 'pathfinder', name: 'Mars Pathfinder + Sojourner', who: 'NASA', year: 1996, art: 'mars',
+    goal: 'A low-cost landing on Mars with the first little rover, Sojourner.',
+    hard: 'The rover could only talk through the lander, about 100 m away.',
+    facts: [['Rocket', 'Delta II 7925', 1], ['Weight', 'Sojourner rover: 10.5 kg'], ['Electricity', 'solar cells and batteries'], ['Radio', 'UHF to the lander, about 100 m'], ['Where', 'Mars, Ares Vallis'], ['Cost', U]],
+    src: ['S34', 'S35'] },
+  { id: 'curiosity', name: 'Curiosity', who: 'NASA', year: 2011, art: 'mars',
+    goal: 'A rover lab checking if Mars could once support life, in Gale Crater.',
+    hard: 'Little power, and it waits for orbiters to fly over to send data.',
+    facts: [['Rocket', 'Atlas V 541', 1], ['Weight', '899 kg rover, 75 kg of science tools'], ['Electricity', 'nuclear MMRTG, about 110 W at the start'], ['Radio', 'X-band to Earth, UHF through Mars orbiters'], ['Science', '10 science instruments'], ['Cost', U]],
+    src: ['S36', 'S37', 'S38', 'S39'] },
+  { id: 'perseverance', name: 'Perseverance + Ingenuity', who: 'NASA', year: 2020, art: 'mars',
+    goal: 'Looks for signs of ancient life and collects rock samples. Ingenuity was the first helicopter on Mars.',
+    hard: 'Its power drops a few percent every year, and it has only 43 sample tubes.',
+    facts: [['Rocket', 'Atlas V 541', 1], ['Weight', 'rover 1,025 kg, helicopter 1.8 kg'], ['Electricity', 'nuclear MMRTG, about 110 W, plus 2 batteries'], ['Radio', 'up to 2 Mbit/s through orbiters'], ['Science', '7 instruments, about 59 kg'], ['Cost', U]],
+    src: ['S40', 'S41', 'S42', 'S43'] },
+  { id: 'change4', name: 'Chang\'e 4 + Yutu-2', who: 'CNSA (China)', year: 2018, art: 'lunarice',
+    goal: 'The first soft landing on the far side of the Moon, with the Yutu-2 rover.',
+    hard: 'The Moon blocks the radio, so a relay satellite, Queqiao, is needed.',
+    facts: [['Rocket', 'Long March 3B', 1], ['Weight', U], ['Electricity', U], ['Radio', 'through the Queqiao relay satellite'], ['Where', 'far side of the Moon, Von Kármán crater'], ['Cost', U]],
+    src: ['S44', 'S52'] },
+  { id: 'rosetta', name: 'Rosetta + Philae', who: 'ESA', year: 2004, art: 'comet',
+    goal: 'Followed comet 67P around the Sun and dropped the Philae lander on it.',
+    hard: 'Weak sunlight far from the Sun, and almost no gravity at the comet.',
+    facts: [['Rocket', 'Ariane 5G+', 1], ['Weight', 'about 3,000 kg with 1,670 kg of fuel; Philae about 100 kg'], ['Electricity', '850 W at 3.4 times Earth\'s distance from the Sun, 395 W at 5.25 times'], ['Radio', 'S-band and X-band; speed changes with distance'], ['Where', 'in orbit around comet 67P'], ['Cost', U]],
+    src: ['S45', 'S46', 'S47'] },
+  { id: 'hayabusa2', name: 'Hayabusa2', who: 'JAXA (Japan)', year: 2014, art: 'asteroid',
+    goal: 'Visited asteroid Ryugu, took samples from under its surface and brought them to Earth.',
+    hard: 'Touching down on a tiny asteroid with almost no gravity.',
+    facts: [['Rocket', 'H-IIA', 1], ['Weight', 'about 600 kg'], ['Electricity', U], ['Radio', 'X-band, speed unknown'], ['Where', 'Earth to Ryugu and back'], ['Cost', U]],
+    src: ['S48'] },
+  { id: 'dart', name: 'DART', who: 'NASA + ASI', year: 2021, art: 'asteroid',
+    goal: 'Crashed into the small asteroid Dimorphos on purpose, to test pushing an asteroid away.',
+    hard: 'Hitting a moonlet only about 160 m wide.',
+    facts: [['Rocket', 'Falcon 9', 1], ['Weight', '610 kg at launch'], ['Electricity', '2 roll-out solar wings, watts unknown'], ['Radio', U], ['Science', 'one navigation camera, DRACO'], ['Cost', U]],
+    src: ['S49', 'S50'] },
+];
+// [id, page title, organization, link]
+const SRC = [
+["S01", "Apollo 11 Mission Overview", "NASA", "https://www.nasa.gov/history/apollo-11-mission-overview/"],
+["S02", "Apollo 11 mission page", "NASA", "https://www.nasa.gov/mission/apollo-11/"],
+["S03", "The Apollo Program", "NASA", "https://www.nasa.gov/the-apollo-program/"],
+["S04", "Artemis I", "NASA", "https://www.nasa.gov/mission/artemis-i/"],
+["S05", "Artemis I Press Kit", "NASA", "https://www.nasa.gov/specials/artemis-i-press-kit/"],
+["S06", "Orion Overview", "NASA", "https://www.nasa.gov/humans-in-space/orion-spacecraft/orion-overview/"],
+["S07", "European Service Module", "Airbus / developer", "https://www.airbus.com/en/products-services/space/space-exploration/moon-missions/orion-european-service-module"],
+["S08", "Demo-2 Mission", "SpaceX / operator", "https://www.spacex.com/launches/demo2"],
+["S09", "ISS Facts and Figures", "NASA", "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/"],
+["S10", "International Space Station", "NASA", "https://www.nasa.gov/reference/international-space-station/"],
+["S11", "Tracking and Data Relay Satellites", "NASA", "https://www.nasa.gov/missions/tdrs/tracking-and-data-relay-satellite-tdrs-generations-of-spacecraft/"],
+["S12", "Hubble by the Numbers", "NASA", "https://science.nasa.gov/mission/hubble/overview/hubble-by-the-numbers/"],
+["S13", "About Hubble", "NASA", "https://science.nasa.gov/mission/hubble/overview/about-hubble/"],
+["S14", "Hubble Communications", "NASA", "https://science.nasa.gov/mission/hubble/observatory/design/design-communications/"],
+["S15", "Hubble Instruments", "NASA", "https://science.nasa.gov/mission/hubble/observatory/design/instruments/"],
+["S16", "Hubble FAQs", "NASA", "https://science.nasa.gov/mission/hubble/overview/faqs/"],
+["S17", "Webb Fact Sheet", "NASA", "https://science.nasa.gov/mission/webb/fact-sheet/"],
+["S18", "Webb Telescope Overview", "NASA", "https://science.nasa.gov/mission/webb/science-overview/science-explainers/telescope-overview/"],
+["S19", "Webb and Deep Space Network", "NASA", "https://science.nasa.gov/asset/webb/webb-and-the-deep-space-network/"],
+["S20", "Webb FAQs", "NASA", "https://science.nasa.gov/mission/webb/faqs-full/"],
+["S21", "Landsat 9", "NASA Science", "https://science.nasa.gov/mission/landsat-9/"],
+["S22", "Landsat 9 Mission Details", "NASA Science", "https://science.nasa.gov/mission/landsat-9/mission-details/"],
+["S23", "GPS Space Segment", "GPS.gov", "https://www.gps.gov/space-segment"],
+["S24", "GPS Space Segment", "FAA", "https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/techops/navservices/gnss/gps/spacesegments"],
+["S25", "Voyager 1", "NASA Science", "https://science.nasa.gov/mission/voyager/voyager-1/"],
+["S26", "Voyager Fact Sheet", "NASA Science", "https://science.nasa.gov/mission/voyager/fact-sheet/"],
+["S27", "Voyager 1 PDS context", "NASA Planetary Data System", "https://pds.nasa.gov/ds-view/pds/viewContext.jsp?identifier=urn%3Anasa%3Apds%3Acontext%3Ainstrument_host%3Aspacecraft.vg1"],
+["S28", "Parker Solar Probe", "NASA Science", "https://science.nasa.gov/mission/parker-solar-probe/"],
+["S29", "Juno Press Kit — Quick Facts", "NASA/JPL", "https://www.jpl.nasa.gov/news/press_kits/juno/facts/"],
+["S30", "Juno Orbits", "NASA Science", "https://science.nasa.gov/mission/juno/juno-orbits/"],
+["S31", "Cassini Quick Facts", "NASA Science", "https://science.nasa.gov/mission/cassini/quick-facts/"],
+["S32", "New Horizons", "NASA Science", "https://science.nasa.gov/mission/new-horizons/"],
+["S33", "New Horizons data return", "NASA Science", "https://science.nasa.gov/mission/new-horizons/"],
+["S34", "Mars Pathfinder", "NASA Science", "https://science.nasa.gov/mission/mars-pathfinder/"],
+["S35", "Sojourner Rover", "NASA/JPL Robotics", "https://www-robotics.jpl.nasa.gov/what-we-do/flight-projects/pathfinder/"],
+["S36", "Curiosity Rover", "NASA Science", "https://science.nasa.gov/mission/msl-curiosity/"],
+["S37", "Curiosity PDS Instrument Host", "NASA Planetary Data System", "https://pds.nasa.gov/ds-view/pds/viewContext.jsp?identifier=urn%3Anasa%3Apds%3Acontext%3Ainstrument_host%3Aspacecraft.msl&version=1.2"],
+["S38", "Learn About Curiosity", "NASA/JPL", "https://mars.nasa.gov/multimedia/interactives/learncuriosity/index-2.html"],
+["S39", "Chapter 14: Launch", "NASA Science", "https://science.nasa.gov/learn/basics-of-space-flight/chapter14-1/"],
+["S40", "Mars 2020 Launch Press Kit — Quick Facts", "NASA/JPL", "https://www.jpl.nasa.gov/news/press_kits/mars_2020/launch/quick_facts/"],
+["S41", "Perseverance Rover Components", "NASA Science", "https://science.nasa.gov/mission/mars-2020-perseverance/rover-components/"],
+["S42", "Perseverance mission", "NASA Science", "https://science.nasa.gov/mission/mars-2020-perseverance/"],
+["S43", "Mars 2020 Launch Services", "NASA KSC", "https://public.ksc.nasa.gov/lsphistory/"],
+["S44", "Chang'e-4", "National Space Science Data Center, China", "https://www.nssdc.ac.cn/nssdc_en/html/task/change4.html"],
+["S45", "Rosetta Factsheet", "ESA", "https://www.esa.int/articles/about-us/directorates/science/rosetta/rosetta-factsheet"],
+["S46", "Rosetta Orbiter", "ESA", "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/The_Rosetta_orbiter"],
+["S47", "Rosetta FAQ", "ESA", "https://www.esa.int/fr/articles/about-us/directorates/science/rosetta/rosetta-s-frequently-asked-questions"],
+["S48", "Hayabusa2 Spacecraft", "JAXA/ISAS", "https://www.isas.jaxa.jp/en/missions/spacecraft/current/hayabusa2.html"],
+["S49", "DART", "NASA Science", "https://science.nasa.gov/mission/Dart/"],
+["S50", "DART PDS Instrument Host", "NASA Planetary Data System", "https://pds.nasa.gov/ds-view/pds/viewContext.jsp?identifier=urn%3Anasa%3Apds%3Acontext%3Ainstrument_host%3Aspacecraft.dart"],
+["S51", "Apollo 11 mission summary (historical record)", "NASA", "https://www.nasa.gov/wp-content/uploads/static/history/SP-4029/Apollo_11a_Summary.htm"],
+["S52", "China's Chang'e-4 probe enters lunar orbit", "China State Council Information Office / Xinhua (report citing CNSA)", "https://english.scio.gov.cn/chinaprojects/2018-12/13/content_74270271.htm"],
+  ["S53", "Landsat 9 and the Future of the Sustainable Land Imaging Program (R46560)", "U.S. Congressional Research Service", "https://www.everycrsreport.com/reports/R46560.html"],
+];
+// other sources the game itself uses: [what it is used for, page title, organization, link or null]
+const GAME_SRC = [
+  ['Earth and Aral Sea maps in the cabin window', 'Blue Marble: Next Generation', 'NASA Earth Observatory', 'https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/'],
+  ['Moon, Mars and Jupiter maps in the cabin window', 'NASA images of the Moon, Mars and Jupiter', 'NASA', null],
+  ['Free CubeSat launches only for US teams', 'About CubeSat Launch Initiative', 'NASA', 'https://www.nasa.gov/content/about-cubesat-launch-initiative'],
+  ['CubeSat launches for teams from Kazakhstan', 'KiboCUBE', 'UNOOSA + JAXA', 'https://www.unoosa.org/oosa/en/ourwork/access2space4all/KiboCUBE/KiboCUBE_Index.html'],
+  ['CubeSat S-band radio speed', 'S-band Transmitter datasheet (TXS)', 'ISISPACE', 'https://www.isispace.nl/wp-content/uploads/2021/01/ISIS-TXS-DSH-0001-S_Band_Transmitter_Datasheet-02_00.pdf'],
+  ['Rocket prices', 'Public launch price lists and news reports, 2025 to 2026', '', null],
+  ['Letters (fonts)', 'Lilita One, Nunito and Rubik', 'Google Fonts (Open Font License)', 'https://fonts.google.com/'],
+];
+const byId = {}; SRC.forEach(s => { byId[s[0]] = s; });
+
+// new quiz questions from the research base (topic "real")
+const QUIZ = [
+  ['Which telescope sends pictures home at 28 Mbit/s from 1.5 million km away?', ['James Webb', 'Hubble', 'Voyager 1'], 0, 'real', 'Webb sends its data over Ka-band radio to the giant dishes of NASA\'s Deep Space Network.', 2],
+  ['How much power does Juno get from sunlight at Jupiter?', ['About 400 W', 'About 14 kW', 'About 5 W'], 0, 'real', 'Near Earth the same solar wings make about 14 kW. At Jupiter sunlight is so weak that only about 400 W is left.', 2],
+  ['How did Chang\'e 4 talk to Earth from the far side of the Moon?', ['Through a relay satellite called Queqiao', 'Through a cable across the Moon', 'It did not need radio'], 0, 'real', 'The Moon blocks the radio. Queqiao flies near the Earth-Moon L2 point, where it can see both the lander and Earth.', 1],
+  ['How long did a message from Cassini at Saturn take to reach Earth?', ['67 to 85 minutes', '1 second', '3 days'], 0, 'real', 'Radio travels at the speed of light, but Saturn is very far away. Cassini had to do a lot on its own.', 2],
+  ['What did DART do?', ['Crashed into a small asteroid on purpose', 'Landed on the Sun', 'Brought back Moon rocks'], 0, 'real', 'DART hit Dimorphos, a moonlet only about 160 m wide, to test pushing an asteroid off course.', 1],
+  ['How heavy was Sojourner, the first Mars rover?', ['10.5 kg', '1,025 kg', '899 kg'], 0, 'real', 'Sojourner was about as heavy as a small dog. Perseverance weighs 1,025 kg, about as much as a small car.', 1],
+  ['Hubble\'s solar panels make more than 5,200 W. How much does it usually use?', ['About 2,100 W', 'All 5,200 W', 'Nothing'], 0, 'real', 'Engineers always keep extra power. That spare power is called a margin.', 2],
+  ['How fast could New Horizons send data home from Pluto?', ['1 to 2 kbit/s', '1 Gbit/s', '28 Mbit/s'], 0, 'real', 'Pluto was 4.5 light-hours away. At that speed, sending all the photos home took a long time.', 2],
+  ['How heavy is the International Space Station?', ['419,725 kg', '4,200 kg', '42 kg'], 0, 'real', 'It was built in orbit from many pieces, carried up by many rockets.', 1],
+  ['How often does Landsat 9 see the same place on Earth?', ['Every 16 days', 'Every minute', 'Once a year'], 0, 'real', 'Its cameras see details of 30 m in color and 15 m in black-and-white, from 705 km up.', 1],
+  ['What did Hayabusa2 bring back to Earth?', ['Samples from asteroid Ryugu', 'A piece of the Sun', 'A Moon rover'], 0, 'real', 'It even took samples from under Ryugu\'s surface, then sent them home in a small capsule.', 1],
+  ['Why does Voyager get less power every year?', ['Its nuclear generators slowly fade', 'Its solar panels get dusty', 'Its batteries run out'], 0, 'real', 'At launch its 3 nuclear generators made about 474 W in total. Every year they make a little less.', 2],
+  ['How much Moon rock did Apollo 11 bring home?', ['21.55 kg', '2,000 kg', '5 g'], 0, 'real', 'Scientists still study these rocks today.', 1],
+];
+if (root.HOOKS) {
+  root.HOOKS.QUIZ.push(...QUIZ);
+  if (!root.HOOKS.QUIZ_TOPICS.some(t => t[0] === 'real')) root.HOOKS.QUIZ_TOPICS.push(['real', 'Real missions']);
+}
+root.RM = { M, SRC, byId, GAME_SRC, U };
 })(window);
 
 </script>
@@ -6614,6 +6888,264 @@ I18N.add3([
 
 </script>
 <script>
+/* Orbi's Mission Lab — v14 translations: Real Missions Museum, sources, real comparison, Landsat 9, research quiz (English, Kazakh, Russian) */
+'use strict';
+I18N.add3([
+  // shared
+  ['{0}', '{0}', '{0}'],
+  ['{0} to {1}', '{0}–{1}', '{0}–{1}'],
+  ['{0} g', '{0} г', '{0} г'],
+  ['{0} second', '{0} секунд', '{0} секунда'],
+  ['About {0}', 'Шамамен {0}', 'Около {0}'],
+  ['All {0}', 'Барлық {0}', 'Все {0}'],
+  ['Every {0}', 'Әр {0} сайын', 'Каждые {0}'],
+  ['about {0}', 'шамамен {0}', 'около {0}'],
+  ['up to {0}', '{0} дейін', 'до {0}'],
+  ['at most {0}', 'ең көбі {0}', 'не больше {0}'],
+  ['unknown', 'белгісіз', 'неизвестно'],
+  ['Nothing', 'Ештеңе', 'Нисколько'],
+  ['Cost', 'Құны', 'Стоимость'],
+  ['Where', 'Қайда', 'Где'],
+  ['Science', 'Ғылым', 'Наука'],
+  ['Real missions', 'Нағыз миссиялар', 'Настоящие миссии'],
+  ['Hubble', 'Хаббл', 'Хаббл'],
+  ['James Webb', 'Джеймс Уэбб', 'Джеймс Уэбб'],
+  ['Voyager {0}', 'Вояджер-{0}', 'Вояджер-{0}'],
+  ['International Space Station', 'Халықаралық ғарыш станциясы', 'Международная космическая станция'],
+  ['Hubble Space Telescope', 'Хаббл ғарыш телескопы', 'Космический телескоп «Хаббл»'],
+  ['James Webb Space Telescope', 'Джеймс Уэбб ғарыш телескопы', 'Космический телескоп «Джеймс Уэбб»'],
+  ['Parker Solar Probe', 'Паркер күн зонды', 'Солнечный зонд «Паркер»'],
+  ['five space agencies', 'бес ғарыш агенттігі', 'пять космических агентств'],
+  ['U.S. Space Force', 'АҚШ Ғарыш күштері', 'Космические силы США'],
+  ['CNSA (China)', 'CNSA (Қытай)', 'CNSA (Китай)'],
+  ['JAXA (Japan)', 'JAXA (Жапония)', 'JAXA (Япония)'],
+  ['NASA + USGS, launched {0}', 'NASA + USGS, {0} жылы ұшырылған', 'NASA + USGS, запуск в {0}'],
+
+  // museum screens
+  ['Real Missions Museum', 'Нағыз миссиялар мұражайы', 'Музей настоящих миссий'],
+  ['Real Missions Museum: {0} real spacecraft', 'Нағыз миссиялар мұражайы: {0} нағыз ғарыш аппараты', 'Музей настоящих миссий: {0} настоящих аппаратов'],
+  ['Visit the Real Missions Museum', 'Нағыз миссиялар мұражайына бар', 'Загляни в Музей настоящих миссий'],
+  ['Real Missions', 'Нағыз миссиялар', 'Настоящие миссии'],
+  ['{0} real spacecraft, real numbers', '{0} нағыз аппарат, нағыз сандар', '{0} настоящих аппаратов, настоящие числа'],
+  ['These {0} missions really flew. Every number comes from an official page. If we could not find a number, we write "unknown". Real scientists never guess!', 'Бұл {0} миссия шынымен ұшқан. Әр сан ресми беттен алынған. Санды таба алмасақ, «белгісіз» деп жазамыз. Нағыз ғалымдар ешқашан болжап жазбайды!', 'Эти {0} миссий летали на самом деле. Каждое число взято с официальной страницы. Если мы не нашли число, пишем «неизвестно». Настоящие учёные никогда не гадают!'],
+  ['{0} of {1} numbers found', '{1} санның {0} табылды', 'Найдено чисел: {0} из {1}'],
+  ['The hardest part', 'Ең қиын жері', 'Самое трудное'],
+  ['"unknown" means we did not find this number on an official page. We never guess.', '«Белгісіз» дегеніміз — бұл санды ресми беттен таппадық деген сөз. Біз ешқашан болжап жазбаймыз.', '«Неизвестно» значит, что мы не нашли это число на официальной странице. Мы никогда не гадаем.'],
+  ['Where these numbers come from', 'Бұл сандар қайдан алынды', 'Откуда эти числа'],
+  ['All missions', 'Барлық миссиялар', 'Все миссии'],
+  ['Sources and NASA data', 'Дереккөздер және NASA деректері', 'Источники и данные NASA'],
+
+  // sources page
+  ['Real scientists always show where their facts come from. Here is everything this game is built on.', 'Нағыз ғалымдар әрдайым деректері қайдан алынғанын көрсетеді. Міне, бұл ойын неге сүйеніп жасалды.', 'Настоящие учёные всегда показывают, откуда их факты. Вот всё, на чём построена эта игра.'],
+  ['NASA data in this game', 'Бұл ойындағы NASA деректері', 'Данные NASA в этой игре'],
+  ['The Earth and Aral Sea maps in the cabin window are traced from NASA\'s Blue Marble pictures.', 'Кабина терезесіндегі Жер мен Арал теңізінің карталары NASA-ның Blue Marble суреттерінен салынған.', 'Карты Земли и Аральского моря в окне кабины нарисованы по снимкам NASA Blue Marble.'],
+  ['The Moon, Mars and Jupiter maps are made from NASA images.', 'Ай, Марс және Юпитер карталары NASA суреттерінен жасалған.', 'Карты Луны, Марса и Юпитера сделаны по снимкам NASA.'],
+  ['Real NASA missions to copy, with their real costs: LRO, MRO, Juno and Landsat {0}.', 'Қайталауға болатын нағыз NASA миссиялары, нағыз бағасымен: LRO, MRO, Juno және Landsat {0}.', 'Настоящие миссии NASA, которые можно повторить, с их настоящей стоимостью: LRO, MRO, Juno и Landsat {0}.'],
+  ['The Real Missions Museum: {0} missions checked on {1} official pages, {2} of them from NASA.', 'Нағыз миссиялар мұражайы: {0} миссия {1} ресми бет бойынша тексерілген, оның {2} беті — NASA-дан.', 'Музей настоящих миссий: {0} миссий проверены по {1} официальным страницам, {2} из них — от NASA.'],
+  ['Real NASA rules inside the game: the CubeSat Launch Initiative and the Deep Space Network.', 'Ойын ішіндегі нағыз NASA ережелері: CubeSat ұшыру бағдарламасы (CSLI) және Алыс ғарыш желісі.', 'Настоящие правила NASA в игре: программа запуска кубсатов (CSLI) и Сеть дальней космической связи.'],
+  ['Our research: {0} missions, {1} official pages', 'Біздің зерттеу: {0} миссия, {1} ресми бет', 'Наше исследование: {0} миссий, {1} официальных страниц'],
+  ['Tap a mission to see its sources.', 'Дереккөздерін көру үшін миссияны бас.', 'Нажми на миссию, чтобы увидеть её источники.'],
+  ['{0} sources', '{0} дереккөз', 'источников: {0}'],
+  ['{0} source', '{0} дереккөз', 'источник: {0}'],
+  ['Other sources', 'Басқа дереккөздер', 'Другие источники'],
+  ['Earth and Aral Sea maps in the cabin window', 'Кабина терезесіндегі Жер мен Арал теңізінің карталары', 'Карты Земли и Аральского моря в окне кабины'],
+  ['Moon, Mars and Jupiter maps in the cabin window', 'Кабина терезесіндегі Ай, Марс және Юпитер карталары', 'Карты Луны, Марса и Юпитера в окне кабины'],
+  ['NASA images of the Moon, Mars and Jupiter', 'NASA-ның Ай, Марс және Юпитер суреттері', 'Снимки Луны, Марса и Юпитера от NASA'],
+  ['Free CubeSat launches only for US teams', 'Тек АҚШ командаларына арналған тегін CubeSat ұшырулары', 'Бесплатные запуски кубсатов только для команд из США'],
+  ['CubeSat launches for teams from Kazakhstan', 'Қазақстан командаларына арналған CubeSat ұшырулары', 'Запуски кубсатов для команд из Казахстана'],
+  ['CubeSat S-band radio speed', 'CubeSat-тың S-диапазон радиосының жылдамдығы', 'Скорость S-диапазонного радио кубсата'],
+  ['Rocket prices', 'Зымыран бағалары', 'Цены ракет'],
+  ['Public launch price lists and news reports, {0} to {1}', 'Ашық ұшыру бағалары мен жаңалықтар, {0}–{1} жж.', 'Открытые прайс-листы и новости о запусках, {0}–{1} гг.'],
+  ['Letters (fonts)', 'Әріптер (қаріптер)', 'Буквы (шрифты)'],
+  ['Made with help from AI', 'Жасанды интеллекттің көмегімен жасалды', 'Сделано с помощью ИИ'],
+  ['Much of this game\'s code, drawings and music was written with help from Claude, an AI made by Anthropic. Our team planned the game, did the mission research and tested it with friends.', 'Бұл ойынның кодының, суреттерінің және музыкасының көп бөлігі Anthropic жасаған Claude жасанды интеллектінің көмегімен жазылды. Ойынды біздің команда ойлап тапты, миссияларды зерттеді және достарымен бірге сынап көрді.', 'Большая часть кода, рисунков и музыки этой игры написана с помощью Claude — ИИ от компании Anthropic. Наша команда придумала игру, исследовала миссии и проверила её вместе с друзьями.'],
+  ['No picture in this game was made by an AI image generator. The planet maps come from NASA images.', 'Бұл ойындағы бірде-бір сурет ЖИ сурет генераторымен жасалмаған. Планета карталары NASA суреттерінен алынған.', 'Ни одна картинка в этой игре не сделана генератором изображений ИИ. Карты планет сделаны по снимкам NASA.'],
+
+  // your ship vs real spacecraft (report)
+  ['Your ship vs real spacecraft', 'Сенің кемең мен нағыз аппараттар', 'Твой корабль и настоящие аппараты'],
+  ['Real spacecraft', 'Нағыз аппарат', 'Настоящий аппарат'],
+  ['Weight at launch', 'Ұшыру кезіндегі салмақ', 'Вес при запуске'],
+  ['Radio speed', 'Радио жылдамдығы', 'Скорость радио'],
+  ['Message delay', 'Хабардың кешігуі', 'Задержка сообщения'],
+  ['more than {0} made, about {1} used', '{0}-тан астам өндіреді, шамамен {1} жұмсайды', 'вырабатывает больше {0}, тратит около {1}'],
+  ['Hubble makes more than twice the power it usually uses. That spare power is its safety margin.', 'Хаббл әдетте жұмсайтынынан екі еседен астам көп қуат өндіреді. Сол артық қуат — оның қауіпсіздік қоры.', '«Хаббл» вырабатывает больше чем вдвое больше энергии, чем обычно тратит. Этот запас — его запас надёжности.'],
+  ['through the Queqiao relay satellite', 'Цюэцяо ретранслятор спутнигі арқылы', 'через спутник-ретранслятор «Цюэцяо»'],
+  ['Orion\'s {0} solar wings make about {1}, enough for a ship built to carry astronauts.', 'Орионның {0} күн қанаты шамамен {1} өндіреді — ғарышкерлерді тасуға арналған кемеге бұл жеткілікті.', '{0} солнечных крыла «Ориона» дают около {1} — этого хватает кораблю для астронавтов.'],
+  ['Webb sends {0} home from {1} million km away, using the giant dishes of the Deep Space Network.', 'Уэбб {1} млн км қашықтықтан үйге {0} жылдамдықпен жібереді, Алыс ғарыш желісінің алып антенналарын пайдаланып.', '«Уэбб» передаёт домой {0} с расстояния {1} млн км через огромные антенны Сети дальней космической связи.'],
+  ['{0} (rover)', '{0} (ровер)', '{0} (ровер)'],
+  ['up to {0} through orbiters', 'орбиталық аппараттар арқылы {0} дейін', 'до {0} через орбитальные аппараты'],
+  ['Perseverance runs a whole rover lab on about {0}. Two batteries help when it needs more.', 'Персеверанс бүкіл ровер-зертханасын шамамен {0} қуатпен жүргізеді. Көбірек керек кезде екі батарея көмектеседі.', '«Персеверанс» питает целую лабораторию на колёсах примерно {0}. Когда нужно больше, помогают две батареи.'],
+  ['about {0} at Jupiter', 'Юпитерде шамамен {0}', 'около {0} у Юпитера'],
+  ['{0} to {1} from Pluto', 'Плутоннан {0}–{1}', '{0}–{1} от Плутона'],
+  ['Juno\'s solar wings make about {0} near Earth but only about {1} at Jupiter, because sunlight there is so weak.', 'Juno-ның күн қанаттары Жер маңында шамамен {0} өндіреді, ал Юпитерде тек шамамен {1}, өйткені онда күн сәулесі өте әлсіз.', 'Солнечные крылья Juno дают около {0} у Земли, но только около {1} у Юпитера: солнечный свет там очень слабый.'],
+  ['{0} to {1} minutes from Saturn', 'Сатурннан {0}–{1} минут', '{0}–{1} минут от Сатурна'],
+
+  // Landsat 9 challenge
+  ['Landsat {0} photographs all of Earth\'s land, and Landsat satellites have watched the Aral Sea since {1}. NASA promised to build it for at most {2}. You get the same!', 'Landsat {0} Жердің бүкіл құрлығын суретке түсіреді, ал Landsat спутниктері Арал теңізін {1} жылдан бері бақылап келеді. NASA оны ең көбі {2} құрауға уәде берді. Саған да сонша беріледі!', 'Landsat {0} снимает всю сушу Земли, а спутники Landsat следят за Аральским морем с {1} года. NASA обещало построить его не дороже {2}. У тебя столько же!'],
+  ['Landsat {0} flies {1} up and sees each place every {2}. Its pictures are free for everyone.', 'Landsat {0} {1} биіктікте ұшады және әр жерді {2} сайын көреді. Оның суреттері барлығына тегін.', 'Landsat {0} летает на высоте {1} и видит каждое место раз в {2}. Его снимки бесплатны для всех.'],
+  ['{0} (black-and-white)', '{0} (ақ-қара)', '{0} (чёрно-белые)'],
+
+  // mission cards: goals
+  ['The first people to walk on the Moon, and come home safely.', 'Айда алғаш рет жүрген адамдар — және үйге аман-есен оралды.', 'Первые люди, прошедшие по Луне и благополучно вернувшиеся домой.'],
+  ['A test flight around the Moon with no crew, to get ready for astronauts.', 'Ғарышкерлерге дайындалу үшін Айды экипажсыз айналып өткен сынақ ұшуы.', 'Испытательный полёт вокруг Луны без экипажа, чтобы подготовиться к астронавтам.'],
+  ['The first test of a private spaceship carrying astronauts to the space station.', 'Ғарышкерлерді ғарыш станциясына жеткізген жеке ғарыш кемесінің алғашқы сынағы.', 'Первое испытание частного корабля, доставившего астронавтов на космическую станцию.'],
+  ['A home and science lab in space where astronauts live and work.', 'Ғарышкерлер тұратын және жұмыс істейтін ғарыштағы үй әрі ғылыми зертхана.', 'Дом и научная лаборатория в космосе, где живут и работают астронавты.'],
+  ['A telescope above the air that sees ultraviolet, visible and near-infrared light.', 'Ультракүлгін, көрінетін және жақын инфрақызыл жарықты көретін, ауадан жоғары тұрған телескоп.', 'Телескоп над атмосферой, который видит ультрафиолетовый, видимый и ближний инфракрасный свет.'],
+  ['An infrared telescope that looks at the first galaxies, stars and planets.', 'Алғашқы галактикаларға, жұлдыздар мен планеталарға қарайтын инфрақызыл телескоп.', 'Инфракрасный телескоп, который смотрит на первые галактики, звёзды и планеты.'],
+  ['Photographs all of Earth\'s land to watch water, forests, farms and cities change.', 'Су, орман, егістік пен қалалардың өзгерісін бақылау үшін Жердің бүкіл құрлығын суретке түсіреді.', 'Снимает всю сушу Земли, чтобы следить, как меняются вода, леса, поля и города.'],
+  ['Satellites that tell your phone where you are and what time it is.', 'Телефоныңа қай жерде екеніңді және сағат қанша екенін айтатын спутниктер.', 'Спутники, которые сообщают твоему телефону, где ты и который час.'],
+  ['Two probes that flew past the giant planets and are now leaving the Solar System.', 'Алып планеталардың жанынан ұшып өтіп, қазір Күн жүйесінен шығып бара жатқан екі зонд.', 'Два зонда, которые пролетели мимо планет-гигантов и теперь покидают Солнечную систему.'],
+  ['Flies closer to the Sun than anything else to study its hot outer air and wind.', 'Күннің ыстық сыртқы ауасы мен желін зерттеу үшін Күнге бәрінен жақын ұшады.', 'Подлетает к Солнцу ближе всех, чтобы изучать его горячую внешнюю атмосферу и ветер.'],
+  ['Studies the inside of Jupiter, its clouds and its magnetic field.', 'Юпитердің ішкі құрылымын, бұлттарын және магнит өрісін зерттейді.', 'Изучает недра Юпитера, его облака и магнитное поле.'],
+  ['Explored Saturn, its rings and moons, and dropped the Huygens probe onto Titan.', 'Сатурнды, оның сақиналары мен серіктерін зерттеп, Гюйгенс зондын Титанға түсірді.', 'Исследовал Сатурн, его кольца и спутники и сбросил зонд «Гюйгенс» на Титан.'],
+  ['The first close flyby of Pluto, then on to the Kuiper Belt.', 'Плутонның жанынан алғаш рет жақын ұшып өтті, содан кейін Койпер белдеуіне бет алды.', 'Первый близкий пролёт мимо Плутона, а затем — дальше, в пояс Койпера.'],
+  ['A low-cost landing on Mars with the first little rover, Sojourner.', 'Алғашқы кішкентай ровер Соджорнермен Марсқа арзан қону.', 'Недорогая посадка на Марс с первым маленьким ровером «Соджорнер».'],
+  ['A rover lab checking if Mars could once support life, in Gale Crater.', 'Гейл кратерінде Марста бір кезде тіршілік болуы мүмкін бе екенін тексеретін ровер-зертхана.', 'Ровер-лаборатория в кратере Гейл: проверяет, могла ли когда-то на Марсе быть жизнь.'],
+  ['Looks for signs of ancient life and collects rock samples. Ingenuity was the first helicopter on Mars.', 'Ежелгі тіршілік іздерін іздейді және тау жынысы үлгілерін жинайды. Инджинюити — Марстағы алғашқы тікұшақ.', 'Ищет следы древней жизни и собирает образцы пород. «Индженьюити» стал первым вертолётом на Марсе.'],
+  ['The first soft landing on the far side of the Moon, with the Yutu-{0} rover.', 'Юйту-{0} роверімен Айдың арғы бетіне алғашқы жұмсақ қону.', 'Первая мягкая посадка на обратную сторону Луны с ровером «Юйту-{0}».'],
+  ['Followed comet {0}P around the Sun and dropped the Philae lander on it.', '{0}P кометасымен бірге Күнді айналып ұшып, оған Филы қону модулін түсірді.', 'Сопровождал комету {0}P вокруг Солнца и сбросил на неё посадочный модуль «Филы».'],
+  ['Visited asteroid Ryugu, took samples from under its surface and brought them to Earth.', 'Рюгу астероидына барып, оның бетінің астынан үлгі алып, Жерге жеткізді.', 'Побывал на астероиде Рюгу, взял образцы из-под его поверхности и доставил их на Землю.'],
+  ['Crashed into the small asteroid Dimorphos on purpose, to test pushing an asteroid away.', 'Астероидты жолынан итеріп жіберуді сынау үшін кішкентай Диморф астероидына әдейі соғылды.', 'Специально врезался в маленький астероид Диморф, чтобы проверить, можно ли оттолкнуть астероид.'],
+
+  // mission cards: hardest parts
+  ['Little time and fuel on the Moon, and no radio while flying behind the Moon.', 'Айда уақыт пен отын аз болды, ал Айдың арғы жағында ұшқанда радио байланыс жоқ еді.', 'Мало времени и топлива на Луне, и нет радиосвязи, пока летишь за Луной.'],
+  ['Coming home super fast and super hot through Earth\'s air.', 'Жер ауасы арқылы өте жылдам әрі өте ыстық болып үйге оралу.', 'Возвращение домой через воздух Земли — очень быстро и очень горячо.'],
+  ['Docking to the station by itself and keeping the crew safe.', 'Станцияға өздігінен түйісу және экипажды аман сақтау.', 'Самостоятельно пристыковаться к станции и сберечь экипаж.'],
+  ['Thin air slowly drags it down, so it needs pushes and supplies.', 'Сирек ауа оны баяу төмен тартады, сондықтан оған итеру мен жүк керек.', 'Разреженный воздух медленно тянет её вниз, поэтому ей нужны подталкивания и грузы.'],
+  ['Air drag in low orbit, and it must point super steadily.', 'Төмен орбитадағы ауа кедергісі, әрі ол өте тұрақты бағытталуы керек.', 'Сопротивление воздуха на низкой орбите, и наводиться нужно очень точно.'],
+  ['It must stay super cold behind a giant sunshield, and nobody can go there to fix it.', 'Ол алып күн қалқанының артында өте суық күйде тұруы керек, ал оны жөндеуге ешкім бара алмайды.', 'Он должен оставаться очень холодным за огромным солнечным щитом, а починить его никто не может.'],
+  ['It sees each place only once every {0}.', 'Ол әр жерді тек {0} сайын бір рет көреді.', 'Каждое место он видит только раз в {0}.'],
+  ['Enough satellites must be in the sky everywhere, all the time.', 'Аспанда барлық жерде, әрдайым спутниктер жеткілікті болуы керек.', 'Спутников должно хватать везде и всегда.'],
+  ['Huge distance, and nuclear power that gets weaker every year.', 'Орасан зор қашықтық және жыл сайын әлсірейтін ядролық қуат.', 'Огромное расстояние и ядерный источник, который слабеет каждый год.'],
+  ['Extreme heat: it needs a heat shield and cooled solar panels.', 'Қатты ыстық: оған жылу қалқаны мен салқындатылатын күн панельдері керек.', 'Жуткая жара: нужен тепловой щит и охлаждаемые солнечные панели.'],
+  ['Strong radiation, and only about {0} of solar power at Jupiter.', 'Күшті радиация және Юпитерде күннен тек шамамен {0} қуат.', 'Сильная радиация и всего около {0} солнечной энергии у Юпитера.'],
+  ['A long trip, slow messages and nuclear power that gets weaker.', 'Ұзақ жол, баяу хабарлар және әлсірейтін ядролық қуат.', 'Долгий путь, медленные сообщения и слабеющий ядерный источник.'],
+  ['A very slow radio, so sending the photos home took a long time.', 'Радио өте баяу болғандықтан, суреттерді үйге жіберу ұзақ уақыт алды.', 'Очень медленное радио, поэтому отправка снимков домой заняла много времени.'],
+  ['The rover could only talk through the lander, about {0} away.', 'Ровер тек шамамен {0} жердегі қону модулі арқылы ғана байланыса алды.', 'Ровер мог связываться только через посадочный модуль, примерно в {0} от него.'],
+  ['Little power, and it waits for orbiters to fly over to send data.', 'Қуаты аз, әрі деректерді жіберу үшін орбиталық аппараттардың үстінен ұшып өтуін күтеді.', 'Мало энергии, и чтобы отправить данные, он ждёт пролёта орбитальных аппаратов.'],
+  ['Its power drops a few percent every year, and it has only {0} sample tubes.', 'Оның қуаты жыл сайын бірнеше пайызға азаяды, ал үлгі түтіктері тек {0}.', 'Его мощность каждый год падает на несколько процентов, а пробирок для образцов всего {0}.'],
+  ['The Moon blocks the radio, so a relay satellite, Queqiao, is needed.', 'Ай радионы бөгейді, сондықтан Цюэцяо ретранслятор спутнигі керек.', 'Луна закрывает радио, поэтому нужен спутник-ретранслятор «Цюэцяо».'],
+  ['Weak sunlight far from the Sun, and almost no gravity at the comet.', 'Күннен алыста күн сәулесі әлсіз, ал кометада тартылыс күші жоқтың қасы.', 'Слабый солнечный свет вдали от Солнца и почти нет притяжения у кометы.'],
+  ['Touching down on a tiny asteroid with almost no gravity.', 'Тартылыс күші жоқтың қасы кішкентай астероидқа қону.', 'Коснуться крошечного астероида, у которого почти нет притяжения.'],
+  ['Hitting a moonlet only about {0} wide.', 'Ені тек шамамен {0} кішкентай серікке тию.', 'Попасть в спутник астероида шириной всего около {0}.'],
+
+  // mission cards: facts
+  ['two ships, Columbia and Eagle, weighed separately', 'екі кеме — Колумбия мен Игл, бөлек өлшенген', 'два корабля, «Колумбия» и «Игл», взвешены отдельно'],
+  ['fuel cells and batteries', 'отын элементтері мен батареялар', 'топливные элементы и батареи'],
+  ['lost for a while behind the Moon', 'Айдың арғы жағында біраз уақыт үзілді', 'пропадало на время за Луной'],
+  ['{0} of Moon rock brought home', 'үйге {0} Ай тасы әкелінді', 'доставлено домой {0} лунных пород'],
+  ['Orion: about {0} at liftoff', 'Орион: ұшқанда шамамен {0}', '«Орион»: около {0} при старте'],
+  ['about {0} from {1} solar wings', '{1} күн қанатынан шамамен {0}', 'около {0} от {1} солнечных крыльев'],
+  ['long-distance radio, speed unknown', 'алысқа жететін радио, жылдамдығы белгісіз', 'дальняя радиосвязь, скорость неизвестна'],
+  ['a far orbit around the Moon, {0} in all', 'Айды айналатын алыс орбита, барлығы {0}', 'далёкая орбита вокруг Луны, всего {0}'],
+  ['the space station, about {0}', 'ғарыш станциясы, шамамен {0}', 'космическая станция, около {0}'],
+  ['many rockets: it was built piece by piece', 'көп зымыран: ол бөлік-бөлігімен құрастырылды', 'много ракет: её собирали по частям'],
+  ['{0} to {1} from {2} solar arrays', '{2} күн батареясынан {0}–{1}', '{0}–{1} от {2} солнечных батарей'],
+  ['relay satellites (TDRS) and ground stations', 'ретранслятор спутниктері (TDRS) және жер станциялары', 'спутники-ретрансляторы (TDRS) и наземные станции'],
+  ['low orbit, about {0} to {1} minutes per lap', 'төмен орбита, бір айналымы шамамен {0}–{1} минут', 'низкая орбита, виток около {0}–{1} минут'],
+  ['no single price: many countries pay', 'бір бағасы жоқ: көп ел төлейді', 'единой цены нет: платят многие страны'],
+  ['about {0} at launch, {1} after repairs', 'ұшырғанда шамамен {0}, жөндеуден кейін {1}', 'около {0} при запуске, {1} после ремонтов'],
+  ['up to {0} through relay satellites', 'ретранслятор спутниктері арқылы {0} дейін', 'до {0} через спутники-ретрансляторы'],
+  ['{0} up, {1} minutes per lap', '{0} биіктікте, бір айналымы {1} минут', 'на высоте {0}, виток {1} минут'],
+  ['about {0} in {1} money, all years together', '{1} жылғы ақшамен шамамен {0}, барлық жылдарды қосқанда', 'около {0} в деньгах {1} года, за все годы вместе'],
+  ['about {0} at launch', 'ұшырғанда шамамен {0}', 'около {0} при запуске'],
+  ['{0} home through the Deep Space Network', 'Алыс ғарыш желісі арқылы үйге {0}', '{0} домой через Сеть дальней космической связи'],
+  ['around the L{0} point, about {1} million km from Earth', 'L{0} нүктесінің маңында, Жерден шамамен {1} млн км', 'около точки L{0}, примерно в {1} млн км от Земли'],
+  ['cameras: {0} color, {1} black-and-white, {2} heat', 'камералар: түрлі-түсті {0}, ақ-қара {1}, жылу {2}', 'камеры: цветная {0}, чёрно-белая {1}, тепловая {2}'],
+  ['{0} up, over the poles, in a sun-synced orbit', '{0} биіктікте, полюстердің үстімен, күнмен үйлесімді орбитада', 'на высоте {0}, над полюсами, на солнечно-синхронной орбите'],
+  ['at most {0} (NASA\'s promise)', 'ең көбі {0} (NASA уәдесі)', 'не больше {0} (обещание NASA)'],
+  ['many rockets over the years', 'жылдар бойы көп зымыран', 'много ракет за много лет'],
+  ['depends on the satellite generation', 'спутник буынына байланысты', 'зависит от поколения спутника'],
+  ['solar panels; {0} atomic clocks on each satellite', 'күн панельдері; әр спутникте {0} атом сағаты', 'солнечные панели; на каждом спутнике {0} атомных часа'],
+  ['L-band navigation signals', 'L-диапазондағы навигация сигналдары', 'навигационные сигналы L-диапазона'],
+  ['{0} up, in {1} orbit rings', '{0} биіктікте, {1} орбита сақинасында', 'на высоте {0}, в {1} орбитальных кольцах'],
+  ['no single price: a system built over many years', 'бір бағасы жоқ: көп жыл бойы құрылған жүйе', 'единой цены нет: система строилась много лет'],
+  ['Voyager {0}: {1} (NASA) or {2} (counted another way)', 'Вояджер-{0}: {1} (NASA) немесе {2} (басқаша есептелген)', '«Вояджер-{0}»: {1} (NASA) или {2} (если считать по-другому)'],
+  ['{0} nuclear generators, about {1} at launch', '{0} ядролық генератор, ұшырғанда шамамен {1}', '{0} ядерных генератора, около {1} при запуске'],
+  ['Deep Space Network; speed depends on distance', 'Алыс ғарыш желісі; жылдамдығы қашықтыққа байланысты', 'Сеть дальней космической связи; скорость зависит от расстояния'],
+  ['{0} experiments; {1} still work on Voyager {2}', '{0} эксперимент; Вояджер-{2}-де {1} әлі жұмыс істейді', '{0} экспериментов; на «Вояджере-{2}» до сих пор работают {1}'],
+  ['{0} at launch', 'ұшырғанда {0}', '{0} при запуске'],
+  ['around the Sun, as close as {0} million km at first', 'Күнді айнала, алғашында {0} млн км-ге дейін жақын', 'вокруг Солнца, сначала до {0} млн км от него'],
+  ['{0} at launch: {1} ship + {2} fuel', 'ұшырғанда {0}: кеме {1} + отын {2}', '{0} при запуске: аппарат {1} + топливо {2}'],
+  ['about {0} near Earth, about {1} at Jupiter', 'Жер маңында шамамен {0}, Юпитерде шамамен {1}', 'около {0} у Земли, около {1} у Юпитера'],
+  ['Deep Space Network, X-band and Ka-band', 'Алыс ғарыш желісі, X- және Ka-диапазон', 'Сеть дальней космической связи, X- и Ka-диапазон'],
+  ['over Jupiter\'s poles, {0} per lap, later {1}', 'Юпитердің полюстерінің үстімен, бір айналымы {0}, кейін {1}', 'над полюсами Юпитера, виток {0}, позже {1}'],
+  ['{0} for the whole mission', 'бүкіл миссияға {0}', '{0} за всю миссию'],
+  ['{0} at launch, with fuel and Huygens', 'ұшырғанда {0}, отынымен және Гюйгенспен', '{0} при запуске, с топливом и «Гюйгенсом»'],
+  ['nuclear: {0} at the start, {1} at the end', 'ядролық: басында {0}, соңында {1}', 'ядерный: {0} в начале, {1} в конце'],
+  ['messages took {0} to {1} minutes to reach Earth', 'хабарлар Жерге {0}–{1} минутта жетті', 'сообщения шли до Земли {0}–{1} минут'],
+  ['{0} orbits around Saturn', 'Сатурнды {0} рет айналды', '{0} витков вокруг Сатурна'],
+  ['{0}, with {1} of flying it', '{0}, {1} басқаруымен бірге', '{0}, вместе с {1} управления'],
+  ['nuclear: about {0} at launch, {1} at Pluto', 'ядролық: ұшырғанда шамамен {0}, Плутонда {1}', 'ядерный: около {0} при запуске, {1} у Плутона'],
+  ['{0} to {1} from Pluto, {2} light-hours away', 'Плутоннан {0}–{1}, {2} жарық сағаты қашықтықтан', '{0}–{1} от Плутона, за {2} светового часа'],
+  ['flew past Pluto without stopping', 'Плутонның жанынан тоқтамай ұшып өтті', 'пролетел мимо Плутона, не останавливаясь'],
+  ['Sojourner rover: {0}', 'Соджорнер роверi: {0}', 'ровер «Соджорнер»: {0}'],
+  ['solar cells and batteries', 'күн элементтері мен батареялар', 'солнечные элементы и батареи'],
+  ['UHF to the lander, about {0}', 'қону модуліне UHF, шамамен {0}', 'UHF до посадочного модуля, около {0}'],
+  ['Mars, Ares Vallis', 'Марс, Арес аңғары', 'Марс, долина Арес'],
+  ['{0} rover, {1} of science tools', 'ровер {0}, ғылыми құралдар {1}', 'ровер {0}, научные приборы {1}'],
+  ['nuclear MMRTG, about {0} at the start', 'ядролық MMRTG, басында шамамен {0}', 'ядерный MMRTG, около {0} в начале'],
+  ['X-band to Earth, UHF through Mars orbiters', 'Жерге X-диапазон, Марс орбиталық аппараттары арқылы UHF', 'X-диапазон до Земли, UHF через орбитальные аппараты Марса'],
+  ['{0} science instruments', '{0} ғылыми құрал', '{0} научных приборов'],
+  ['rover {0}, helicopter {1}', 'ровер {0}, тікұшақ {1}', 'ровер {0}, вертолёт {1}'],
+  ['nuclear MMRTG, about {0}, plus {1} batteries', 'ядролық MMRTG, шамамен {0}, оған қоса {1} батарея', 'ядерный MMRTG, около {0}, плюс {1} батареи'],
+  ['{0} instruments, about {1}', '{0} құрал, шамамен {1}', '{0} приборов, около {1}'],
+  ['far side of the Moon, Von Kármán crater', 'Айдың арғы беті, фон Карман кратері', 'обратная сторона Луны, кратер Фон Карман'],
+  ['about {0} with {1} of fuel; Philae about {2}', 'шамамен {0}, оның {1} — отын; Филы шамамен {2}', 'около {0}, из них {1} топлива; «Филы» около {2}'],
+  ['{0} at {1} times Earth\'s distance from the Sun, {2} at {3} times', 'Күннен Жерге қарағанда {1} есе алыста {0}, {3} есе алыста {2}', '{0} на расстоянии от Солнца в {1} раза больше земного, {2} — в {3} раза больше'],
+  ['S-band and X-band; speed changes with distance', 'S- және X-диапазон; жылдамдық қашықтыққа қарай өзгереді', 'S- и X-диапазон; скорость меняется с расстоянием'],
+  ['in orbit around comet {0}P', '{0}P кометасын айналатын орбитада', 'на орбите вокруг кометы {0}P'],
+  ['X-band, speed unknown', 'X-диапазон, жылдамдығы белгісіз', 'X-диапазон, скорость неизвестна'],
+  ['Earth to Ryugu and back', 'Жерден Рюгуге және кері', 'от Земли до Рюгу и обратно'],
+  ['{0} roll-out solar wings, watts unknown', '{0} оралмалы күн қанаты, ваттары белгісіз', '{0} разворачивающихся солнечных крыла, мощность неизвестна'],
+  ['one navigation camera, DRACO', 'бір навигация камерасы, DRACO', 'одна навигационная камера, DRACO'],
+
+  // research quiz
+  ['Which telescope sends pictures home at {0} from {1} million km away?', 'Қай телескоп суреттерді {1} млн км қашықтықтан үйге {0} жылдамдықпен жібереді?', 'Какой телескоп отправляет снимки домой со скоростью {0} с расстояния {1} млн км?'],
+  ['Webb sends its data over Ka-band radio to the giant dishes of NASA\'s Deep Space Network.', 'Уэбб деректерін Ka-диапазон радиосымен NASA-ның Алыс ғарыш желісінің алып антенналарына жібереді.', '«Уэбб» передаёт данные по радио Ka-диапазона на огромные антенны Сети дальней космической связи NASA.'],
+  ['How much power does Juno get from sunlight at Jupiter?', 'Juno Юпитерде күн сәулесінен қанша қуат алады?', 'Сколько энергии Juno получает от солнечного света у Юпитера?'],
+  ['Near Earth the same solar wings make about {0}. At Jupiter sunlight is so weak that only about {1} is left.', 'Жер маңында сол күн қанаттары шамамен {0} өндіреді. Юпитерде күн сәулесі соншалық әлсіз, тек шамамен {1} қалады.', 'У Земли те же солнечные крылья дают около {0}. У Юпитера свет такой слабый, что остаётся только около {1}.'],
+  ['How did Chang\'e {0} talk to Earth from the far side of the Moon?', 'Чанъэ-{0} Айдың арғы бетінен Жермен қалай байланысты?', 'Как «Чанъэ-{0}» связывался с Землёй с обратной стороны Луны?'],
+  ['Through a relay satellite called Queqiao', 'Цюэцяо деген ретранслятор спутнигі арқылы', 'Через спутник-ретранслятор «Цюэцяо»'],
+  ['Through a cable across the Moon', 'Айды кесіп өтетін кабель арқылы', 'По кабелю через всю Луну'],
+  ['It did not need radio', 'Оған радио керек емес еді', 'Радио ему было не нужно'],
+  ['The Moon blocks the radio. Queqiao flies near the Earth-Moon L{0} point, where it can see both the lander and Earth.', 'Ай радионы бөгейді. Цюэцяо Жер–Ай жүйесінің L{0} нүктесінің маңында ұшады, сол жерден қону модулін де, Жерді де көреді.', 'Луна закрывает радио. «Цюэцяо» летает около точки L{0} системы Земля–Луна, откуда видит и посадочный модуль, и Землю.'],
+  ['How long did a message from Cassini at Saturn take to reach Earth?', 'Сатурндағы Кассиниден хабар Жерге қанша уақытта жетті?', 'Сколько шло до Земли сообщение от «Кассини» у Сатурна?'],
+  ['{0} to {1} minutes', '{0}–{1} минут', '{0}–{1} минут'],
+  ['Radio travels at the speed of light, but Saturn is very far away. Cassini had to do a lot on its own.', 'Радио жарық жылдамдығымен тарайды, бірақ Сатурн өте алыста. Кассиниге көп нәрсені өзі істеуге тура келді.', 'Радио летит со скоростью света, но Сатурн очень далеко. «Кассини» многое приходилось делать самому.'],
+  ['What did DART do?', 'DART не істеді?', 'Что сделал DART?'],
+  ['Crashed into a small asteroid on purpose', 'Кішкентай астероидқа әдейі соғылды', 'Специально врезался в маленький астероид'],
+  ['Landed on the Sun', 'Күнге қонды', 'Сел на Солнце'],
+  ['Brought back Moon rocks', 'Ай тастарын әкелді', 'Привёз лунные камни'],
+  ['DART hit Dimorphos, a moonlet only about {0} wide, to test pushing an asteroid off course.', 'DART астероидты жолынан тайдыруды сынау үшін ені тек шамамен {0} Диморф деген кішкентай серікке соғылды.', 'DART врезался в Диморф — спутник астероида шириной всего около {0}, чтобы проверить, можно ли сбить астероид с курса.'],
+  ['How heavy was Sojourner, the first Mars rover?', 'Марстағы алғашқы ровер Соджорнердің салмағы қанша болды?', 'Сколько весил «Соджорнер», первый марсоход?'],
+  ['Sojourner was about as heavy as a small dog. Perseverance weighs {0}, about as much as a small car.', 'Соджорнер кішкентай иттей ғана ауыр болды. Персеверанс {0} тартады — шағын көліктей.', '«Соджорнер» весил примерно как маленькая собака. «Персеверанс» весит {0} — примерно как маленький автомобиль.'],
+  ['Hubble\'s solar panels make more than {0}. How much does it usually use?', 'Хабблдың күн панельдері {0}-тан астам өндіреді. Ол әдетте қанша жұмсайды?', 'Солнечные панели «Хаббла» дают больше {0}. Сколько он обычно тратит?'],
+  ['Engineers always keep extra power. That spare power is called a margin.', 'Инженерлер әрдайым артық қуат қалдырады. Сол артық қуат қор деп аталады.', 'Инженеры всегда оставляют лишнюю энергию. Этот запас называется резервом.'],
+  ['How fast could New Horizons send data home from Pluto?', 'Нью Хорайзонс Плутоннан үйге деректі қаншалықты жылдам жібере алды?', 'С какой скоростью «Новые горизонты» могли отправлять данные домой от Плутона?'],
+  ['Pluto was {0} light-hours away. At that speed, sending all the photos home took a long time.', 'Плутон {0} жарық сағаты қашықтықта болды. Мұндай жылдамдықпен барлық суретті үйге жіберу ұзаққа созылды.', 'Плутон был в {0} световых часах от нас. С такой скоростью отправка всех снимков домой заняла много времени.'],
+  ['How heavy is the International Space Station?', 'Халықаралық ғарыш станциясының салмағы қанша?', 'Сколько весит Международная космическая станция?'],
+  ['It was built in orbit from many pieces, carried up by many rockets.', 'Ол көп зымыран жеткізген көптеген бөліктерден орбитада құрастырылды.', 'Её собрали на орбите из множества частей, которые доставили много ракет.'],
+  ['How often does Landsat {0} see the same place on Earth?', 'Landsat {0} Жердегі бір жерді қаншалықты жиі көреді?', 'Как часто Landsat {0} видит одно и то же место на Земле?'],
+  ['Every minute', 'Әр минут сайын', 'Каждую минуту'],
+  ['Once a year', 'Жылына бір рет', 'Раз в год'],
+  ['Its cameras see details of {0} in color and {1} in black-and-white, from {2} up.', 'Оның камералары {2} биіктіктен түрлі-түсті суретте {0}, ақ-қара суретте {1} бөлшектерді көреді.', 'Его камеры с высоты {2} различают детали в {0} в цвете и {1} в чёрно-белом.'],
+  ['What did Hayabusa{0} bring back to Earth?', 'Хаябуса-{0} Жерге не әкелді?', 'Что «Хаябуса-{0}» привёз на Землю?'],
+  ['Samples from asteroid Ryugu', 'Рюгу астероидының үлгілерін', 'Образцы с астероида Рюгу'],
+  ['A piece of the Sun', 'Күннің бір бөлігін', 'Кусочек Солнца'],
+  ['A Moon rover', 'Ай роверін', 'Луноход'],
+  ['It even took samples from under Ryugu\'s surface, then sent them home in a small capsule.', 'Ол тіпті Рюгу бетінің астынан үлгі алып, оларды шағын капсуламен үйге жіберді.', 'Он даже взял образцы из-под поверхности Рюгу, а потом отправил их домой в маленькой капсуле.'],
+  ['Why does Voyager get less power every year?', 'Неге Вояджердің қуаты жыл сайын азаяды?', 'Почему у «Вояджера» каждый год становится меньше энергии?'],
+  ['Its nuclear generators slowly fade', 'Ядролық генераторлары баяу әлсірейді', 'Его ядерные генераторы медленно слабеют'],
+  ['Its solar panels get dusty', 'Күн панельдері шаңданады', 'Его солнечные панели пылятся'],
+  ['Its batteries run out', 'Батареялары таусылады', 'У него садятся батарейки'],
+  ['At launch its {0} nuclear generators made about {1} in total. Every year they make a little less.', 'Ұшырғанда оның {0} ядролық генераторы барлығы шамамен {1} өндірді. Жыл сайын олар сәл азырақ өндіреді.', 'При запуске его {0} ядерных генератора давали всего около {1}. Каждый год они дают чуть меньше.'],
+  ['How much Moon rock did Apollo {0} bring home?', 'Аполлон-{0} үйге қанша Ай тасын әкелді?', 'Сколько лунных пород привёз домой «Аполлон-{0}»?'],
+  ['Scientists still study these rocks today.', 'Ғалымдар бұл тастарды әлі күнге дейін зерттеп жүр.', 'Учёные изучают эти камни до сих пор.'],
+]);
+
+</script>
+<script>
 /* =====================================================================
    Orbi's Mission Lab — the cabin window
    The player looks out of the spaceship window at a cartoon planet made
@@ -8101,6 +8633,7 @@ const scen = () => st.career && st.carScen && st.scenId === st.carScen.id ? st.c
 
 /* ---------- progression: Stardust, levels, shop, daily mission (hooks.js) ---------- */
 const HK = window.HOOKS;
+const RM = window.RM;
 let prof = Object.assign(HK.defaultProfile(), store.get('profile', {}));
 const saveProf = () => store.set('profile', prof);
 function applySkin() { const c = k => (HK.item(prof.equip[k]) || {}).c; A.skin = { paint: c('paint') || A.skin.paint, panel: c('panel') || A.skin.panel, hat: prof.equip.hat || 'hat-none', trail: c('trail') || A.skin.trail }; }
@@ -8218,7 +8751,7 @@ function menuPop() {
     <div class="mrow" data-notr><span>Language / Тіл / Язык</span><div class="langrow">${I18.LANGS.map(([k, n]) => `<button class="langopt ${I18.lang === k ? 'on' : ''}" data-act="setLang" data-v="${k}">${n}</button>`).join('')}</div></div>
     <div class="mrow"><span>Music</span><button class="toggle ${on ? 'on' : ''}" data-act="music" aria-pressed="${on}"><i></i><span>${on ? 'On' : 'Off'}</span></button></div>
     <div class="mrow"><span>Sound effects</span><button class="toggle ${A.muted ? '' : 'on'}" data-act="sound" aria-pressed="${!A.muted}"><i></i><span>${A.muted ? 'Off' : 'On'}</span></button></div>
-    <div class="mlinks"><button class="btn small" data-act="home">${A.icon('home')} Home</button><button class="btn small" data-act="learn">Science corner</button><button class="btn small" data-act="howto">How to play</button></div>
+    <div class="mlinks"><button class="btn small" data-act="home">${A.icon('home')} Home</button><button class="btn small" data-act="learn">Science corner</button><button class="btn small" data-act="museum">Real Missions Museum</button><button class="btn small" data-act="sources">Sources and NASA data</button><button class="btn small" data-act="howto">How to play</button></div>
     <div class="row"><button class="btn yellow small" data-act="closeSound">Done</button></div>`;
   document.body.appendChild(p);
 }
@@ -8247,6 +8780,7 @@ function home() {
       <button class="hooktile yellow" data-act="shop">${A.icon('shop')}<b>Shop</b><span>${prof.capsules ? `${prof.capsules} free capsule${prof.capsules > 1 ? 's' : ''} to open!` : 'Paint, hats and sparks'}</span></button>
       <button class="hooktile purple" data-act="school">${A.icon('rocket')}<b>Pilot School</b><span>${Object.keys(prof.pilot || {}).length ? 'Beat your best flights!' : 'Fly rockets, land on the Moon'}</span></button>
       <button class="hooktile cyan" data-act="atlas">${A.icon('book')}<b>Space Atlas</b><span>${prof.cards.length} of ${HK.CARDS.length} cards found</span></button>
+      <button class="hooktile orange" data-act="museum">${A.planet('saturn')}<b>Real Missions</b><span>20 real spacecraft, real numbers</span></button>
     </div>
     <div class="modes"><button class="modecard" data-act="easy" data-v="1" aria-pressed="${st.easy}"><b>Easy mode</b><span>Simple words. Orbi handles the tricky engineering. Great for ages 6 and up.</span></button>
       <button class="modecard" data-act="easy" data-v="0" aria-pressed="${!st.easy}"><b>Engineer mode</b><span>Every setting, number and formula: link budgets, Δv, margins and TRL.</span></button></div>
@@ -9532,7 +10066,7 @@ function report() {
   </div>
   ${gap <= 120 ? `<p class="nearmiss">So close! Only ${num(gap)} more points for ${n + 1} stars. Tweak one thing and fly again!</p>` : ''}
   ${rw.cards.length ? `<div class="card" style="margin-top:16px"><h3>New Space Atlas card${rw.cards.length > 1 ? 's' : ''}!</h3><div class="atlas">${rw.cards.map(c => cardHTML(c, true)).join('')}</div></div>` : ''}
-  ${whyHTML(m, r, info)}${nasaCompareHTML(m, r)}${whatIfHTML(m)}${photosReportHTML(m)}
+  ${whyHTML(m, r, info)}${nasaCompareHTML(m, r)}${realCompareHTML(m)}${whatIfHTML(m)}${photosReportHTML(m)}
   ${rw.daily ? `<div class="card stack" style="margin-top:16px"><h3>Share today's result</h3><p class="small muted">Send this to your friends and see who does better on the same daily mission.</p><textarea id="dailyShare" rows="6" readonly aria-label="Daily result to share">${esc(dailyShareText(r, n))}</textarea><div class="row"><button class="btn small cyan" data-act="copyShare" data-target="dailyShare">Copy</button></div></div>` : ''}
   <div class="two" style="margin-top:18px">
     <div class="card stack"><h3>Score</h3><div class="parts">${r.parts.map(([nm, v, max], i) => `<div class="part"><span>${esc(st.easy ? ['Goals reached', 'Science sent home', 'Smart spending', 'Good decisions', 'Teamwork'][i] : nm)}</span><i><em style="width:${clamp(v / max, 0, 1) * 100}%;background:${barCols[i]}"></em></i><b class="num">${Math.round(v)}/${max}</b></div>`).join('')}</div>
@@ -9620,6 +10154,7 @@ function cardHTML(c, fresh) {
 function atlas() {
   sky.setDim(0.3);
   app.innerHTML = topBar() + `<div class="stack" style="gap:16px"><div class="spread"><h2 class="on-space">Space Atlas: ${prof.cards.length} of ${HK.CARDS.length} cards</h2><span class="on-space muted small">Every card is a real spacecraft, rocket or space idea. Fly missions to find them all.</span></div>
+    <div class="row"><button class="btn yellow small" data-act="museum">Real Missions Museum: 20 real spacecraft</button></div>
     <div class="atlas">${HK.CARDS.map(c => cardHTML(c)).join('')}</div>
     <div class="row"><button class="btn" data-act="back">Back</button></div></div>`;
 }
@@ -9714,6 +10249,7 @@ const LEARN = [
 function learn() {
   sky.setDim(0.3);
   app.innerHTML = topBar() + `<div class="stack" style="gap:16px"><div class="talk">${A.orbi(80)}<div class="bubble">Welcome to the Science corner! Here's how space really works. Every one of these ideas is inside the game.</div></div>
+    <div class="row"><button class="btn yellow" data-act="museum">Real Missions Museum</button><button class="btn cyan" data-act="sources">Sources and NASA data</button></div>
     <div class="learn">${LEARN.map(([t, kid, pro]) => `<div class="card"><h3>${t}</h3><p>${kid}</p>${st.easy ? why('For grown-ups', `<p>${pro}</p>`) : `<p class="small muted">${pro}</p>`}</div>`).join('')}
 </div>
     <div class="row"><button class="btn" data-act="back">Back</button></div></div>`;
@@ -9879,13 +10415,16 @@ const NASA = [
     fact: 'Juno was the first solar-powered spacecraft to reach Jupiter. Its electronics ride inside a titanium vault to survive the radiation.',
     rows: [['Weight at launch', 3625, '3,625 kg', 'low', e => e.mass.wet * e.N, kg], ['Electricity at Jupiter', 400, 'about 400 W', 'high', e => e.power.pEOL, W], ['Cost (today\'s money)', 1640, 'about $1.64B', 'low', (e, r) => r.totalCost, money], ['Solar panels', null, 'more than 60 m²', null, (e, r, m) => m.d.power.src === 'rtg' ? 'nuclear battery' : `${m.d.power.area} m²`, x => x], ['Rocket', null, 'Atlas V 551', null, e => e.lv.name, x => x]] },
 ];
+NASA.push({ id: 'landsat9', base: 'aral', name: 'Landsat 9', who: 'NASA + USGS', year: 2021, budget: 885, job: 'Landsat 9 photographs all of Earth\'s land, and Landsat satellites have watched the Aral Sea since 1972. NASA promised to build it for at most $885M. You get the same!',
+  fact: 'Landsat 9 flies 705 km up and sees each place every 16 days. Its pictures are free for everyone.',
+  rows: [['Camera sharpness (one dot)', 15, '15 m (black-and-white)', 'low', e => bestGsd(e), len, 1], ['Cost', 885, 'at most $885M', 'low', (e, r) => r.totalCost, money], ['Height above Earth', null, '705 km', null, e => e.orb.h, x => `${num(x)} km`], ['Rocket', null, 'Atlas V 401', null, e => e.lv.name, x => x]] });
 function chalScenario(c) { const base = E.SCEN.find(x => x.id === c.base); return Object.assign({}, base, { lvs: base.lvs.slice(), buses: base.buses.slice(), budget: c.budget || base.budget, challenge: c.id }); }
 function nasa() {
   sky.setDim(0.3); const done = store.get('nasa', {});
   app.innerHTML = topBar() + `<div class="stack" style="gap:16px"><div class="talk">${A.orbi(86, 'wow')}<div class="bubble">These spacecraft really flew! Build your own version to do the same job, then see how yours compares with the real one.</div></div>
     <div class="nasagrid">${NASA.map(c => `<div class="nasacard"><div class="npic">${A.planet(c.base)}<span class="year">${c.year}</span></div><div class="stack" style="gap:6px"><h3>${esc(c.name)}</h3><span class="small muted">${esc(c.who)}, launched ${c.year}</span><p class="small">${esc(c.job)}</p>
       ${done[c.id] ? `<span class="chip ok">Your best: ${greyStars(done[c.id])}</span>` : ''}<div class="row"><button class="btn yellow" data-act="chal" data-id="${c.id}">Try it</button></div></div></div>`).join('')}</div>
-    <div class="row"><button class="btn" data-act="map">Back to the map</button></div></div>`;
+    <div class="row"><button class="btn yellow" data-act="museum">Real Missions Museum</button><button class="btn" data-act="map">Back to the map</button></div></div>`;
 }
 function realTable(c) { return `<div class="realcard"><h3>The real ${esc(c.name)} (${c.year})</h3><div class="checklist">${c.rows.map(rw => `<div>${A.icon('check')}<span>${esc(rw[0])}</span><span class="small"><b>${esc(rw[2])}</b></span></div>`).join('')}</div></div>`; }
 function nasaCompareHTML(m, r) {
@@ -9905,6 +10444,63 @@ function nasaCompareHTML(m, r) {
 function photosReportHTML(m) {
   const a = m.album || []; if (!a.length) return '';
   return `<div class="card" style="margin-top:16px"><h3>Photos you took</h3><div class="thumbs big">${a.slice(0, 8).map(p => `<button class="thumb" data-act="viewPhoto" data-n="${p.n}" aria-label="Photo ${p.n}: ${esc(p.cap)}">${phImg(p)}<span>${esc(p.cap)}</span></button>`).join('')}</div></div>`;
+}
+
+
+/* ---------- v14: Real Missions Museum, sources, your ship vs real spacecraft ---------- */
+const srcLi = s => s ? `<li><span class="srctag" data-notr>${s[0]}</span><a href="${esc(s[3])}" target="_blank" rel="noopener" data-notr>${esc(s[1])}</a><span class="small muted" data-notr>${esc(s[2])}</span></li>` : '';
+const knownN = m => m.facts.filter(f => f[1] !== RM.U).length;
+const mPic = (art, size) => A.planet(art).replace('class="planet"', `class="planet" width="${size}" height="${size}"`);
+function museum() {
+  sky.setDim(0.3);
+  const m = st.museumId && RM.M.find(x => x.id === st.museumId);
+  if (m) return museumDetail(m);
+  app.innerHTML = topBar() + `<div class="stack" style="gap:16px"><div class="talk">${A.orbi(86, 'wow')}<div class="bubble">These 20 missions really flew. Every number comes from an official page. If we could not find a number, we write "unknown". Real scientists never guess!</div></div>
+    <div class="spread"><h2 class="on-space">Real Missions Museum</h2><button class="btn small cyan" data-act="sources">Sources and NASA data</button></div>
+    <div class="museum">${RM.M.map(x => `<button class="mcard" data-act="museumOpen" data-id="${x.id}"><div class="npic">${mPic(x.art, 84)}<span class="year">${x.year}</span></div><b>${esc(x.name)}</b><span class="small muted">${esc(x.who)}</span><span class="small">${esc(x.goal)}</span><span class="mknown">${A.icon('check')}<span>${knownN(x)} of ${x.facts.length} numbers found</span></span></button>`).join('')}</div>
+    <div class="row"><button class="btn" data-act="back">Back</button></div></div>`;
+}
+function museumDetail(m) {
+  const i = RM.M.indexOf(m), n = RM.M.length, prev = RM.M[(i + n - 1) % n], next = RM.M[(i + 1) % n];
+  app.innerHTML = topBar() + `<div class="stack" style="gap:16px"><div class="card mdetail">
+    <div class="mhead"><div class="npic">${mPic(m.art, 96)}<span class="year">${m.year}</span></div><div class="stack" style="gap:6px"><h2>${esc(m.name)}</h2><span class="muted">${esc(m.who)}</span><p class="mgoal">${esc(m.goal)}</p></div></div>
+    <div class="mhard">${A.icon('bulb')}<div><b>The hardest part</b><p>${esc(m.hard)}</p></div></div>
+    <div class="tablewrap"><table class="mfacts">${m.facts.map(([l, v, nm]) => `<tr><th>${esc(l)}</th><td>${v === RM.U ? '<span class="chip unk">unknown</span>' : `<span ${nm ? 'data-notr' : ''}>${esc(v)}</span>`}</td></tr>`).join('')}</table></div>
+    <p class="small muted">"unknown" means we did not find this number on an official page. We never guess.</p>
+    <h3>Where these numbers come from</h3><ul class="srclist">${m.src.map(id => srcLi(RM.byId[id])).join('')}</ul></div>
+    <div class="row mnav"><button class="btn" data-act="museumOpen" data-id="${prev.id}"><span aria-hidden="true">‹</span><span>${esc(prev.name)}</span></button><button class="btn yellow" data-act="museumAll">All missions</button><button class="btn" data-act="museumOpen" data-id="${next.id}"><span>${esc(next.name)}</span><span aria-hidden="true">›</span></button></div></div>`;
+}
+function sources() {
+  sky.setDim(0.3);
+  const nasaN = RM.SRC.filter(x => /NASA/.test(x[2])).length;
+  app.innerHTML = topBar() + `<div class="stack" style="gap:16px"><div class="talk">${A.orbi(80)}<div class="bubble">Real scientists always show where their facts come from. Here is everything this game is built on.</div></div>
+    <h2 class="on-space">Sources and NASA data</h2>
+    <div class="card stack"><h3>NASA data in this game</h3><ul class="plainlist">
+      <li>The Earth and Aral Sea maps in the cabin window are traced from NASA's Blue Marble pictures.</li>
+      <li>The Moon, Mars and Jupiter maps are made from NASA images.</li>
+      <li>Real NASA missions to copy, with their real costs: LRO, MRO, Juno and Landsat 9.</li>
+      <li>The Real Missions Museum: ${RM.M.length} missions checked on ${RM.SRC.length} official pages, ${nasaN} of them from NASA.</li>
+      <li>Real NASA rules inside the game: the CubeSat Launch Initiative and the Deep Space Network.</li></ul></div>
+    <div class="card stack"><h3>Our research: ${RM.M.length} missions, ${RM.SRC.length} official pages</h3><p class="small muted">Tap a mission to see its sources.</p>
+      ${RM.M.map(m => `<details class="srcgroup"><summary><b>${esc(m.name)}</b><span class="small muted">${m.src.length} ${m.src.length === 1 ? 'source' : 'sources'}</span></summary><ul class="srclist">${m.src.map(id => srcLi(RM.byId[id])).join('')}</ul></details>`).join('')}</div>
+    <div class="card stack"><h3>Other sources</h3><ul class="srclist">${RM.GAME_SRC.map(([use, t, org, url]) => `<li class="gsrc"><b>${esc(use)}</b>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener" data-notr>${esc(t)}</a>` : `<span>${esc(t)}</span>`}${org ? `<span class="small muted" data-notr>${esc(org)}</span>` : ''}</li>`).join('')}</ul></div>
+    <div class="card stack"><h3>Made with help from AI</h3><p>Much of this game's code, drawings and music was written with help from Claude, an AI made by Anthropic. Our team planned the game, did the mission research and tested it with friends.</p><p class="small muted">No picture in this game was made by an AI image generator. The planet maps come from NASA images.</p></div>
+    <div class="row"><button class="btn yellow" data-act="museum">Real Missions Museum</button><button class="btn" data-act="back">Back</button></div></div>`;
+}
+const REALCMP = {
+  earth: { who: 'Hubble', p: 'more than 5,200 W made, about 2,100 W used', w: 'about 10,800 kg', r: 'up to 1 Mbit/s', tip: 'Hubble makes more than twice the power it usually uses. That spare power is its safety margin.' },
+  moon: { who: 'Orion (Artemis I)', p: 'about 11.2 kW', w: 'about 35,380 kg', rWho: 'Chang\'e 4', r: 'through the Queqiao relay satellite', tip: 'Orion\'s 4 solar wings make about 11.2 kW, enough for a ship built to carry astronauts.' },
+  l2: { who: 'James Webb', p: 'about 2,000 W', w: 'about 6,200 kg', r: '28 Mbit/s', tip: 'Webb sends 28 Mbit/s home from 1.5 million km away, using the giant dishes of the Deep Space Network.' },
+  mars: { who: 'Perseverance', p: 'about 110 W', w: '1,025 kg (rover)', r: 'up to 2 Mbit/s through orbiters', tip: 'Perseverance runs a whole rover lab on about 110 W. Two batteries help when it needs more.' },
+  jupiter: { who: 'Juno', p: 'about 400 W at Jupiter', w: '3,625 kg', rWho: 'New Horizons', r: '1 to 2 kbit/s from Pluto', tip: 'Juno\'s solar wings make about 14 kW near Earth but only about 400 W at Jupiter, because sunlight there is so weak.' },
+};
+const delayTxt = km => { if (!isFinite(km) || km <= 0) return '—'; const s = km / 299792.458; return s < 1 ? `${s.toFixed(s < 0.01 ? 3 : 2)} s` : s < 90 ? `${s.toFixed(1)} s` : s < 5400 ? `${Math.round(s / 60)} min` : `${(s / 3600).toFixed(1)} h`; };
+function realCompareHTML(m) {
+  if (scen().challenge || !m.ev || !m.d) return '';
+  const e = m.ev, R = REALCMP[(m.d.orbit && m.d.orbit.dest) || 'earth']; if (!R) return '';
+  const rows = [['Electricity', W(e.power.pEOL), R.who, R.p], ['Weight at launch', kg(e.mass.wet * (e.N || 1)), R.who, R.w], ['Radio speed', rate(e.comms.rateMbps), R.rWho || R.who, R.r], ['Message delay', delayTxt(e.comms.rangeKm), 'Cassini', '67 to 85 minutes from Saturn']];
+  return `<div class="card" style="margin-top:16px"><h3>Your ship vs real spacecraft</h3><div class="tablewrap"><table><tr><th></th><th class="r">Yours</th><th>Real spacecraft</th></tr>${rows.map(([l, y, who, v]) => `<tr><td>${esc(l)}</td><td class="r"><b>${esc(y)}</b></td><td><b data-notr>${esc(who)}</b><br><span>${esc(v)}</span></td></tr>`).join('')}</table></div>
+    <p class="small">${esc(R.tip)}</p><div class="row"><button class="btn small cyan" data-act="museum">Visit the Real Missions Museum</button></div></div>`;
 }
 
 
@@ -10114,13 +10710,13 @@ addEventListener('scroll', () => { const c = document.getElementById('coach'); i
    ROUTER + EVENTS
    ===================================================================== */
 let prevScreen = 'home';
-const SIDE = ['learn', 'shop', 'atlas', 'quiz', 'story', 'howto', 'nasa', 'custom', 'school', 'hq'];
+const SIDE = ['learn', 'shop', 'atlas', 'quiz', 'story', 'howto', 'nasa', 'custom', 'school', 'hq', 'museum', 'sources'];
 function go(screen) {
   if (!SIDE.includes(st.screen) && st.screen !== screen) prevScreen = st.screen;
   st.screen = screen; closeModal();
   if (screen !== 'flight') cancelAnimationFrame(raf);
   A.music.mood(screen === 'flight' ? 'adventure' : 'calm');
-  ({ home, map, crew, build, review, flight, report, hangar, board, badges, learn, showdown, shop, atlas, quiz, story, howto, nasa, custom, school, hq }[screen])();
+  ({ home, map, crew, build, review, flight, report, hangar, board, badges, learn, showdown, shop, atlas, quiz, story, howto, nasa, custom, school, hq, museum, sources }[screen])();
   window.scrollTo(0, 0); closeSound(); tutSoon();
 }
 function refresh(full, msgs) {
@@ -10150,6 +10746,7 @@ document.addEventListener('click', e => {
   const el = e.target.closest('[data-act]'); if (!el) return; const a = el.dataset.act;
   const H = {
     home: () => { closeSound(); if (st.screen === 'build') confirmLeave('home'); else go('home'); }, map: () => { st.versus = null; go('map'); }, hangar: () => { compareSel = []; go('hangar'); }, board: () => go('board'), badges: () => go('badges'), learn: () => go('learn'),
+    museum: () => { st.museumId = null; go('museum'); }, museumAll: () => { st.museumId = null; go('museum'); }, museumOpen: () => { st.museumId = el.dataset.id; go('museum'); }, sources: () => go('sources'),
     back: () => go(SIDE.includes(prevScreen) ? 'home' : prevScreen),
     goBack: () => goBack(),
     menu: () => { if (document.getElementById('soundpop')) closeSound(); else menuPop(); },
@@ -10285,7 +10882,7 @@ function start(data) {
     goBack();
   });
   if (data && data.st) { Object.assign(st, data.st); st.screen = data.screen || 'home'; }
-  const ok = st.screen && st.screen !== 'home' && (['hangar', 'board', 'badges', 'learn', 'map', 'shop', 'atlas', 'quiz', 'story', 'howto', 'nasa', 'custom'].includes(st.screen) || (st.scenId && (st.screen !== 'build' && st.screen !== 'review' || st.design)));
+  const ok = st.screen && st.screen !== 'home' && (['hangar', 'board', 'badges', 'learn', 'map', 'shop', 'atlas', 'quiz', 'story', 'howto', 'nasa', 'custom', 'museum', 'sources'].includes(st.screen) || (st.scenId && (st.screen !== 'build' && st.screen !== 'review' || st.design)));
   go(ok ? st.screen : 'home');
 }
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(start); else start(window.claude && window.claude.hot && window.claude.hot.data || {});
